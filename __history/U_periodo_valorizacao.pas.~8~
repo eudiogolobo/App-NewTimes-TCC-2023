@@ -1,0 +1,55 @@
+unit U_periodo_valorizacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.Mask, Vcl.DBCtrls, Vcl.ExtCtrls;
+
+type
+  Tfrm_periodo_valorizacao = class(TForm)
+    Panel1: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    Label3: TLabel;
+    Label4: TLabel;
+    dtp1: TDateTimePicker;
+    dtp2: TDateTimePicker;
+    procedure btn_salvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_periodo_valorizacao: Tfrm_periodo_valorizacao;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm,u_imprimir_valorizacao;
+
+procedure Tfrm_periodo_valorizacao.btn_salvarClick(Sender: TObject);
+begin
+ with dm.qmensalidade do
+          begin
+          close;
+          sql.Clear;
+          sql.Add('select a.MensalidadeId,a.MatriculaCod,a.DataPagamento, a.ValorMensalidade, a.DataVencimento, a.status,a.FormaPagamento,a.n_parcela, b.id, b.AlunoCod,c.id,c.nome,c.data_nasc,d.AlunoCod,d.cpf');
+          sql.Add('from mensalidade as a, matricula as b, alunos as c, documentos as d');
+          sql.Add('where a.MatriculaCod = b.id and b.AlunoCod = c.id and d.AlunoCod = c.id and a.DataVencimento between :DataInicio and :DataFinal and a.status= :status');
+          parambyname('DataInicio').AsDate:=  dtp1.Date;
+          parambyname('DataFinal').AsDate:=  dtp2.Date;
+          parambyname('status').asstring:= 'PAGO';
+          open;
+           end;
+
+frm_imprimir_valorizacao.rll.Preview();
+
+  frm_periodo_valorizacao.Close;
+end;
+
+end.

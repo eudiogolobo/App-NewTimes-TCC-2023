@@ -1,0 +1,111 @@
+unit U_cadAluno07;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtDlgs;
+
+type
+  Tfrm_cadAluno07 = class(TForm)
+    Panel27: TPanel;
+    Label14: TLabel;
+    Panel28: TPanel;
+    Panel34: TPanel;
+    Label16: TLabel;
+    Panel49: TPanel;
+    Label23: TLabel;
+    Panel36: TPanel;
+    Panel31: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel32: TPanel;
+    SpeedButton2: TSpeedButton;
+    Panel1: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image2: TImage;
+    Label2: TLabel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Image3: TImage;
+    Label3: TLabel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Image4: TImage;
+    Label4: TLabel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Image5: TImage;
+    Label5: TLabel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Image6: TImage;
+    Label6: TLabel;
+    ScrollBar1: TScrollBar;
+    SpeedButton3: TSpeedButton;
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno07: Tfrm_cadAluno07;
+
+implementation
+
+{$R *.dfm}
+uses
+u_principalpas, U_cadAluno06, u_dm;
+
+procedure Tfrm_cadAluno07.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.max-scrollbar1.PageSize) then
+begin
+  scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_cadAluno07.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.position<>0 then
+begin
+scrollbar1.position:=scrollbar1.position-10;
+panel27.top:= -scrollbar1.position;
+end;
+end;
+
+procedure Tfrm_cadAluno07.ScrollBar1Change(Sender: TObject);
+begin
+panel27.top:= -scrollbar1.position;
+end;
+
+procedure Tfrm_cadAluno07.SpeedButton2Click(Sender: TObject);
+begin
+ frm_cadAluno06 := Tfrm_cadAluno06.Create(self);
+frm_cadAluno06.Parent:= frm_prncipal.panel2;
+frm_cadAluno06.Align:= alClient;
+frm_cadAluno06.BorderStyle:= bsNone;
+frm_cadAluno06.WindowState :=wsMaximized;
+frm_cadAluno06.show;
+end;
+
+procedure Tfrm_cadAluno07.SpeedButton3Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+end.

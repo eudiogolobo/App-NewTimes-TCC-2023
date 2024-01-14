@@ -1,0 +1,142 @@
+unit U_pesqaluser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pqaluser = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    DBGrid1: TDBGrid;
+    Label2: TLabel;
+    lb_total: TLabel;
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure Panel1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pqaluser: Tfrm_pqaluser;
+  AltDelUser,USER:integer;
+
+implementation
+
+{$R *.dfm}
+uses
+ u_principalpas,U_altuser, u_dm, u_deluserpas;
+
+procedure Tfrm_pqaluser.DBGrid1CellClick(Column: TColumn);
+begin
+ if AltDelUser=1 then
+ begin
+   USER:=dm.qusuariosid.Value;
+  frm_altuser := Tfrm_altuser.Create(Self);
+  frm_altuser.Parent:= frm_prncipal.panel2;
+  frm_altuser.Align:= alClient;
+  frm_altuser.BorderStyle:= bsNone;
+  frm_altuser.WindowState :=wsMaximized;
+  frm_altuser.Position :=poMainFormCenter;
+  frm_altuser.Show;
+ end;
+
+  if AltDelUser=2 then
+ begin
+
+  frm_deluser := Tfrm_deluser.Create(Self);
+  frm_deluser.Parent:= frm_prncipal.panel2;
+  frm_deluser.Align:= alClient;
+  frm_deluser.BorderStyle:= bsNone;
+  frm_deluser.WindowState :=wsMaximized;
+  frm_deluser.Position :=poMainFormCenter;
+  frm_deluser.Show;
+ end;
+
+end;
+
+procedure Tfrm_pqaluser.DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+frm_prncipal.pnl_sub_menu_notas.Visible:=false;
+end;
+
+procedure Tfrm_pqaluser.FormCreate(Sender: TObject);
+begin
+ with dm.qusuarios do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from usuarios ');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qusuarios.RecordCount);
+  end;
+end;
+
+procedure Tfrm_pqaluser.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_pqaluser.Panel1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+frm_prncipal.pnl_sub_menu_notas.Visible:=false;
+end;
+
+procedure Tfrm_pqaluser.SpeedButton1Click(Sender: TObject);
+ begin
+    with dm.qusuarios do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from usuarios where nome like ''%'+txt_buscar.Text+'%''');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qusuarios.RecordCount);
+  end;
+ end;
+
+end.

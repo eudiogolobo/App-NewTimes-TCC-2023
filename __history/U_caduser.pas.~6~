@@ -1,0 +1,134 @@
+unit U_caduser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls, data.DB;
+
+type
+  Tfrm_caduser = class(TForm)
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Label1: TLabel;
+    Panel5: TPanel;
+    DBEdit2: TDBEdit;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    DBEdit1: TDBEdit;
+    Panel6: TPanel;
+    Label3: TLabel;
+    Panel7: TPanel;
+    DBEdit3: TDBEdit;
+    btn_salvar: TPanel;
+    SpeedButton1: TSpeedButton;
+    btn_incluir: TPanel;
+    SpeedButton2: TSpeedButton;
+    btn_cancelar: TPanel;
+    SpeedButton3: TSpeedButton;
+    btn_alterar: TPanel;
+    SpeedButton5: TSpeedButton;
+    btn_excluir: TPanel;
+    SpeedButton6: TSpeedButton;
+    Panel8: TPanel;
+    Label4: TLabel;
+    Panel9: TPanel;
+    DBEdit4: TDBEdit;
+    Label17: TLabel;
+    Panel10: TPanel;
+    Panel35: TPanel;
+    Label5: TLabel;
+    procedure FormActivate(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBEdit3Change(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_caduser: Tfrm_caduser;
+
+implementation
+
+{$R *.dfm}
+uses
+U_dm,U_altuser, U_deluserpas;
+
+procedure Tfrm_caduser.DBEdit3Change(Sender: TObject);
+begin
+if dbedit3.Text = '' then
+btn_salvar.Enabled:=false
+else
+begin
+ btn_salvar.Enabled:=true;
+btn_cancelar.Enabled:=true;
+end;
+end;
+
+procedure Tfrm_caduser.FormActivate(Sender: TObject);
+begin
+dm.tbuser.Close;
+btn_salvar.Enabled:=false;
+btn_cancelar.Enabled:=false;
+btn_incluir.Enabled:=true;
+  btn_incluir.SetFocus;
+end;
+
+procedure Tfrm_caduser.SpeedButton1Click(Sender: TObject);
+begin
+if dm.tbuser.State in [dsinsert]  then
+ begin
+   dm.tbuser.Post;
+   btn_incluir.Enabled:=true;
+   btn_incluir.setfocus;
+
+ end;
+ dm.FDTransaction1.StartTransaction;
+ dm.FDTransaction1.CommitRetaining;
+
+ btn_salvar.Enabled:=false;
+ dm.tbuser.close;
+
+
+
+ showmessage('Cadastro salvo com sucesso');
+
+end;
+
+procedure Tfrm_caduser.SpeedButton2Click(Sender: TObject);
+begin
+dm.tbuser.open();
+dm.tbuser.Append;
+ dbedit2.SetFocus;
+ btn_incluir.Enabled:=false
+end;
+
+procedure Tfrm_caduser.SpeedButton3Click(Sender: TObject);
+begin
+dm.tbuser.Cancel;
+dm.tbuser.close;
+btn_incluir.Enabled:=true;
+btn_incluir.SetFocus;
+end;
+
+procedure Tfrm_caduser.SpeedButton5Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_altuser, frm_altuser);
+frm_altuser.ShowModal;
+end;
+
+procedure Tfrm_caduser.SpeedButton6Click(Sender: TObject);
+begin
+ application.CreateForm(Tfrm_deluser, frm_deluser);
+frm_deluser.ShowModal;
+end;
+
+end.

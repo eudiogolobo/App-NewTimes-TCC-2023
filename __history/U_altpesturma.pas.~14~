@@ -1,0 +1,108 @@
+unit U_altpesturma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pqaltturma = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label2: TLabel;
+    lb_total: TLabel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pqaltturma: Tfrm_pqaltturma;
+  CodAltDelTurma, AltDelTurma:integer;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm,U_turma_relacao, U_exturma, u_altturma, u_principalpas;
+
+procedure Tfrm_pqaltturma.DBGrid1CellClick(Column: TColumn);
+begin
+if AltDelTurma=1 then
+  begin
+  CodAltDelTurma:= dm.qturmasid_turmas.value;
+
+  frm_altturma := Tfrm_altturma.Create(Self);
+  frm_altturma.Parent:= frm_prncipal.panel2;
+  frm_altturma.Align:= alClient;
+  frm_altturma.BorderStyle:= bsNone;
+  frm_altturma.WindowState :=wsMaximized;
+  frm_altturma.Position :=poMainFormCenter;
+  frm_altturma.Show;
+  end;
+
+  if AltDelTurma=2 then
+  begin
+
+  CodAltDelTurma:= dm.qturmasid_turmas.value;
+
+  frm_exturma := Tfrm_exturma.Create(Self);
+
+  frm_exturma.Parent:= frm_prncipal.panel2;
+  frm_exturma.Align:= alClient;
+  frm_exturma.BorderStyle:= bsNone;
+  frm_exturma.WindowState :=wsMaximized;
+  frm_exturma.Position :=poMainFormCenter;
+  frm_exturma.Show;
+  end;
+
+  if AltDelTurma=3 then
+  begin
+
+  CodAltDelTurma:= dm.qturmasid_turmas.value;
+
+  frm_turma_relacao := Tfrm_turma_relacao.Create(Self);
+
+  frm_turma_relacao.Parent:= frm_prncipal.panel2;
+  frm_turma_relacao.Align:= alClient;
+  frm_turma_relacao.BorderStyle:= bsNone;
+  frm_turma_relacao.WindowState :=wsMaximized;
+  frm_turma_relacao.Position :=poMainFormCenter;
+  frm_turma_relacao.Show;
+  end;
+
+
+end;
+
+procedure Tfrm_pqaltturma.FormCreate(Sender: TObject);
+begin
+dm.qturmas.Close;
+dm.qturmas.Open();
+end;
+
+procedure Tfrm_pqaltturma.SpeedButton1Click(Sender: TObject);
+
+begin
+             with dm.qturmas do
+           begin
+           close;
+            sql.clear;
+            sql.Add('select * from turmas where Turma like ''%'+txt_buscar.Text+'%'' ');
+
+            open;
+            lb_total.Caption:=inttostr(dm.tbturma.RecordCount);
+           end;
+
+end;
+
+end.

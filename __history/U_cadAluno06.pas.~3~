@@ -1,0 +1,72 @@
+unit U_cadAluno06;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno06 = class(TForm)
+    Panel27: TPanel;
+    Label14: TLabel;
+    Panel28: TPanel;
+    Panel34: TPanel;
+    Label16: TLabel;
+    Panel49: TPanel;
+    Label23: TLabel;
+    Panel36: TPanel;
+    Panel10: TPanel;
+    Label5: TLabel;
+    Panel11: TPanel;
+    Edit1: TEdit;
+    Panel12: TPanel;
+    Label6: TLabel;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    Panel31: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel32: TPanel;
+    SpeedButton2: TSpeedButton;
+    Panel18: TPanel;
+    Label25: TLabel;
+    RadioButton7: TRadioButton;
+    RadioButton8: TRadioButton;
+    Panel2: TPanel;
+    Label24: TLabel;
+    ComboBox4: TComboBox;
+    Panel14: TPanel;
+    Label7: TLabel;
+    RadioButton5: TRadioButton;
+    RadioButton6: TRadioButton;
+    Panel25: TPanel;
+    Label26: TLabel;
+    ComboBox1: TComboBox;
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno06: Tfrm_cadAluno06;
+
+implementation
+
+{$R *.dfm}
+uses
+U_cadAluno05, u_principalpas;
+
+procedure Tfrm_cadAluno06.SpeedButton2Click(Sender: TObject);
+begin
+   frm_cadAluno05 := Tfrm_cadAluno05.Create(self);
+frm_cadAluno05.Parent:= frm_prncipal.panel2;
+frm_cadAluno05.Align:= alClient;
+frm_cadAluno05.BorderStyle:= bsNone;
+frm_cadAluno05.WindowState :=wsMaximized;
+frm_cadAluno05.show;
+end;
+
+end.

@@ -1,0 +1,118 @@
+unit U_cad_avaliacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ExtCtrls, u_dm, Data.DB;
+
+type
+  Tfrm_cad_avaliacao = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel33: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    pnl_alterar: TPanel;
+    btn_alterar: TSpeedButton;
+    pnl_excluir: TPanel;
+    btn_excluir: TSpeedButton;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Label4: TLabel;
+    Edit1: TEdit;
+    cb1: TComboBox;
+    procedure btn_salvarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cad_avaliacao: Tfrm_cad_avaliacao;
+
+implementation
+
+{$R *.dfm}
+uses
+U_principalpas;
+
+procedure Tfrm_cad_avaliacao.btn_salvarClick(Sender: TObject);
+ begin
+  if (edit1.Text='')  then
+    showmessage('Campo obtigatório em branco!')
+   else
+
+  begin
+     begin
+     with dm.qconsul do
+     begin
+     Close();
+     sql.clear;
+     sql.add('select * from alunos where turma='+Quotedstr(cb1.text)+'');
+     Open();
+     end;
+
+      dm.qconsul.First;
+      while not dm.qconsul.Eof do
+     begin
+      with dm.tbavaliacao do
+      begin
+
+         close;
+         sql.clear;
+         sql.add('INSERT INTO avaliacao (curso, professor, nome_avaliacao, nome_aluno, turma,nota, data, hora)VALUES(:curso,:professor,:nome_avaliacao,:nome_aluno,:turma,:nota,:data,:hora)');
+         ParamByName('curso').asstring:= 'CU';
+         ParamByName('professor').asstring:= 'DIOGO';
+         ParamByName('nome_avaliacao').asstring:= edit1.Text;
+         ParamByName('nome_aluno').asstring:=(dm.qconsul.FieldByName('nome').asstring);
+         ParamByName('nota').asstring:=('0');
+         ParamByName('turma').asstring:= cb1.Text;
+         ParamByName('data').asstring:= FormatDateTime ('dd "/" mm "/" yyyy',now);;
+         ParamByName('hora').asstring:= FormatDateTime ('hh:mm:ss',now);
+         execsql;
+
+      end;
+      dm.qconsul.Next;
+     end;
+
+
+    end;
+
+       showmessage('Cadastro salvo com sucesso');
+      end;
+
+
+   end;
+
+
+procedure Tfrm_cad_avaliacao.FormCreate(Sender: TObject);
+begin
+with dm.qturmas do
+ begin
+     Close();
+     sql.clear;
+     sql.add('select * from turmas where curso='+Quotedstr(cb4.text)+'');
+     Open();
+     end;
+      cb2.Clear;
+      dm.qturmas.First;
+      while not dm.qturmas.Eof do
+      begin
+       cb2.Items.Add(dm.qturmas.FieldByName('turma').asstring);
+       dm.qturmas.Next();
+      end;
+end;
+
+end.

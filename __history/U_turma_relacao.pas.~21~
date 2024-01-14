@@ -1,0 +1,145 @@
+unit U_turma_relacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Vcl.Buttons, Vcl.ComCtrls;
+
+type
+  Tfrm_turma_relacao = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    cb2: TComboBox;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel8: TPanel;
+    dtp2: TDateTimePicker;
+    Panel11: TPanel;
+    Label6: TLabel;
+    cb1: TComboBox;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    dtp1: TDateTimePicker;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    cb3: TComboBox;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    ScrollBar1: TScrollBar;
+    procedure SpeedButton4Click(Sender: TObject);
+
+    procedure FormCreate(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_turma_relacao: Tfrm_turma_relacao;
+  captura:integer;
+
+implementation
+
+{$R *.dfm}
+uses
+u_im_turma, u_dm,U_pes_turma_relacao;
+
+procedure Tfrm_turma_relacao.btn_salvarClick(Sender: TObject);
+begin
+
+    with dm.QMATRICULA do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select a.id,a.AlunoCod,a.DataMatricula, a.TurmaCod, a.SituacaoMatricula, b.id_turmas, b.CursoCod, b.Turma, b.Turno,c.id, c.nome, c.data_nasc, d.CursosId, d.Nome, d.Formato, e.AlunoCod, e.cpf');
+      sql.Add('from matricula as a, turmas as b,alunos as c, cursos as d,documentos as e');
+      sql.Add('where a.AlunoCod = c.id and a.TurmaCod = b.id_turmas and b.CursoCod = d.CursosId and a.TurmaCod = :codturmas  ');
+      parambyname('codturmas').AsInteger:= dm.qturmasid_turmas.Value;
+      open;
+    end;
+
+
+    frm_turma_documento.tr.Preview() ;
+
+
+end;
+
+procedure Tfrm_turma_relacao.FormCreate(Sender: TObject);
+begin
+ // pegando cod do nome do curso
+   with dm.qcursos do
+ begin
+    close;
+    sql.Clear;
+    sql.Add('select * from cursos where CursosId= :codigozin');
+    parambyname('codigozin').aSinteger:= dm.qturmasCursoCod.value;
+    open;
+ end;
+
+edit1.Text:= dm.qturmasTurma.Text;
+
+ dtp1.Date:=  dm.qturmasDataInicio.value;
+
+ dtp2.Date:=  dm.qturmasDataFinal.value;
+
+ cb1.ItemIndex:= cb1.Items.IndexOf(dm.qcursosNome.Text);
+
+ cb2.ItemIndex:= cb2.Items.IndexOf(dm.qturmasTurno.Text);
+
+ cb3.ItemIndex:= cb3.Items.IndexOf(dm.qturmasStatus.Text);
+
+end;
+
+procedure Tfrm_turma_relacao.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_turma_relacao.FormMouseWheelUp(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_turma_relacao.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+procedure Tfrm_turma_relacao.SpeedButton4Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_pesqimpturma,  frm_pesqimpturma);
+ frm_pesqimpturma.ShowModal;
+end;
+
+end.

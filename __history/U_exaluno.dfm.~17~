@@ -1,0 +1,866 @@
+object frm_exaluno: Tfrm_exaluno
+  Left = 0
+  Top = 0
+  Caption = 'EXCLUS'#195'O DE ALUNO'
+  ClientHeight = 661
+  ClientWidth = 884
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 884
+    Height = 661
+    Align = alClient
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    object Label17: TLabel
+      Left = 115
+      Top = 155
+      Width = 164
+      Height = 19
+      Caption = 'Informa'#231#245'es do Aluno:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Panel33: TPanel
+      Left = -3
+      Top = 46
+      Width = 798
+      Height = 0
+      BevelOuter = bvNone
+      Color = clGray
+      ParentBackground = False
+      TabOrder = 0
+    end
+    object Panel5: TPanel
+      Left = 115
+      Top = 214
+      Width = 153
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      object Label2: TLabel
+        Left = 0
+        Top = 0
+        Width = 153
+        Height = 17
+        Align = alTop
+        Caption = 'C'#211'DIGO:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 52
+      end
+      object Panel6: TPanel
+        Left = 0
+        Top = 48
+        Width = 153
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit2: TDBEdit
+        Left = 0
+        Top = 23
+        Width = 153
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'id'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel7: TPanel
+      Left = 115
+      Top = 274
+      Width = 175
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      object Label3: TLabel
+        Left = 0
+        Top = 0
+        Width = 175
+        Height = 17
+        Align = alTop
+        Caption = 'NOME:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 42
+      end
+      object Panel8: TPanel
+        Left = 0
+        Top = 48
+        Width = 175
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit1: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 193
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'nome'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel9: TPanel
+      Left = 371
+      Top = 275
+      Width = 87
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 3
+      object Label4: TLabel
+        Left = 0
+        Top = 0
+        Width = 87
+        Height = 17
+        Align = alTop
+        Caption = 'CPF:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 24
+      end
+      object Panel10: TPanel
+        Left = 0
+        Top = 48
+        Width = 87
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit3: TDBEdit
+        Left = 0
+        Top = 23
+        Width = 113
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        DataField = 'cpf'
+        DataSource = dm.dsalunos
+        Enabled = False
+        MaxLength = 14
+        TabOrder = 1
+      end
+    end
+    object Panel11: TPanel
+      Left = 539
+      Top = 274
+      Width = 82
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 4
+      object Label5: TLabel
+        Left = 0
+        Top = 0
+        Width = 82
+        Height = 17
+        Align = alTop
+        Caption = 'CELULAR:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 55
+      end
+      object Panel12: TPanel
+        Left = 0
+        Top = 48
+        Width = 82
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit4: TDBEdit
+        Left = 0
+        Top = 22
+        Width = 105
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        DataField = 'fone'
+        DataSource = dm.dsalunos
+        Enabled = False
+        MaxLength = 15
+        TabOrder = 1
+      end
+    end
+    object Panel13: TPanel
+      Left = 115
+      Top = 343
+      Width = 246
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 5
+      object Label6: TLabel
+        Left = 0
+        Top = 0
+        Width = 246
+        Height = 17
+        Align = alTop
+        Caption = 'ENDERE'#199'O:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 69
+      end
+      object Panel14: TPanel
+        Left = 0
+        Top = 48
+        Width = 246
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit5: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 265
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'endereco'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel15: TPanel
+      Left = 421
+      Top = 343
+      Width = 137
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 6
+      object Label7: TLabel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 17
+        Align = alTop
+        Caption = 'CEP:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 25
+      end
+      object Panel16: TPanel
+        Left = 0
+        Top = 48
+        Width = 137
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit6: TDBEdit
+        Left = 0
+        Top = 23
+        Width = 153
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        DataField = 'cep'
+        DataSource = dm.dsalunos
+        Enabled = False
+        MaxLength = 9
+        TabOrder = 1
+      end
+    end
+    object Panel17: TPanel
+      Left = 115
+      Top = 416
+      Width = 137
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 7
+      object Label8: TLabel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 17
+        Align = alTop
+        Caption = 'CIDADE:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 47
+      end
+      object Panel18: TPanel
+        Left = 0
+        Top = 48
+        Width = 137
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit7: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 153
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'cidade'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel19: TPanel
+      Left = 318
+      Top = 414
+      Width = 137
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 8
+      object Label9: TLabel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 17
+        Align = alTop
+        Caption = 'BAIRRO:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 47
+      end
+      object Panel20: TPanel
+        Left = 0
+        Top = 48
+        Width = 137
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit8: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 153
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'bairro'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel21: TPanel
+      Left = 610
+      Top = 343
+      Width = 137
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 9
+      object Label10: TLabel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 17
+        Align = alTop
+        Caption = 'E-MAIL:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 44
+      end
+      object Panel22: TPanel
+        Left = 0
+        Top = 48
+        Width = 137
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit9: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 153
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'email'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel23: TPanel
+      Left = 516
+      Top = 414
+      Width = 119
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 10
+      object Label11: TLabel
+        Left = 0
+        Top = 0
+        Width = 119
+        Height = 17
+        Align = alTop
+        Caption = 'DATA DE NASCIMETO:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 128
+      end
+      object Panel24: TPanel
+        Left = 0
+        Top = 48
+        Width = 119
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit10: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 81
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        DataField = 'data_nasc'
+        DataSource = dm.dsalunos
+        Enabled = False
+        MaxLength = 10
+        TabOrder = 1
+      end
+    end
+    object Panel25: TPanel
+      Left = 263
+      Top = 488
+      Width = 137
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 11
+      object Label12: TLabel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 17
+        Align = alTop
+        Caption = 'DATA DE CADASTRO:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 122
+      end
+      object Panel26: TPanel
+        Left = 0
+        Top = 48
+        Width = 137
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit11: TDBEdit
+        Left = 0
+        Top = 27
+        Width = 132
+        Height = 21
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        DataField = 'data_cad'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel27: TPanel
+      Left = 703
+      Top = 273
+      Width = 65
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 12
+      object Label13: TLabel
+        Left = 0
+        Top = 0
+        Width = 65
+        Height = 17
+        Align = alTop
+        Caption = 'UF:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 18
+      end
+      object DBComboBox1: TDBComboBox
+        Left = 0
+        Top = 23
+        Width = 49
+        Height = 21
+        DataField = 'uf'
+        DataSource = dm.dsalunos
+        Enabled = False
+        Items.Strings = (
+          'MA'
+          'PI'
+          'CE'
+          'RN'
+          'PB'
+          'PE'
+          'AL'
+          'SE'
+          'BA'
+          'MG'
+          'ES'
+          'RJ'
+          'SP'
+          'PR'
+          'SC'
+          'RS'
+          'MS'
+          'MT'
+          'GO'
+          'DF')
+        TabOrder = 0
+      end
+    end
+    object Panel28: TPanel
+      Left = 691
+      Top = 416
+      Width = 77
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 13
+      object Label14: TLabel
+        Left = 0
+        Top = 0
+        Width = 77
+        Height = 17
+        Align = alTop
+        Caption = 'SITUA'#199#195'O:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 63
+      end
+      object DBComboBox3: TDBComboBox
+        Left = 0
+        Top = 23
+        Width = 65
+        Height = 21
+        DataField = 'situacao'
+        DataSource = dm.dsalunos
+        Enabled = False
+        Items.Strings = (
+          'ATIVO'
+          'INATIVO')
+        TabOrder = 0
+      end
+    end
+    object Panel29: TPanel
+      Left = 115
+      Top = 488
+      Width = 118
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 14
+      object Label15: TLabel
+        Left = 0
+        Top = 0
+        Width = 118
+        Height = 17
+        Align = alTop
+        Caption = 'CURSO:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 45
+      end
+      object cb2: TDBComboBox
+        Left = 0
+        Top = 23
+        Width = 106
+        Height = 21
+        DataField = 'curso'
+        DataSource = dm.dsalunos
+        Enabled = False
+        TabOrder = 0
+      end
+    end
+    object Panel35: TPanel
+      Left = 115
+      Top = 54
+      Width = 653
+      Height = 72
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      TabOrder = 15
+      object Panel36: TPanel
+        Left = 302
+        Top = 31
+        Width = 130
+        Height = 30
+        BevelOuter = bvNone
+        Color = 16744448
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 0
+        object SpeedButton1: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 130
+          Height = 30
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = 'CONFIRMAR'
+          Flat = True
+          OnClick = iaClick
+          ExplicitTop = 6
+        end
+      end
+      object Panel37: TPanel
+        Left = 256
+        Top = 31
+        Width = 31
+        Height = 30
+        BevelOuter = bvNone
+        Color = 16744448
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 1
+        object SpeedButton4: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 31
+          Height = 30
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = '...'
+          Flat = True
+          OnClick = SpeedButton2Click
+          ExplicitTop = -8
+        end
+      end
+      object Panel39: TPanel
+        Left = 13
+        Top = 12
+        Width = 219
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 2
+        object Label1: TLabel
+          Left = 0
+          Top = 0
+          Width = 219
+          Height = 17
+          Align = alTop
+          Caption = 'Selecione o ID do aluno:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          ExplicitWidth = 142
+        end
+        object Panel40: TPanel
+          Left = 0
+          Top = 48
+          Width = 219
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+        object Edit1: TEdit
+          Left = 0
+          Top = 27
+          Width = 217
+          Height = 21
+          BorderStyle = bsNone
+          TabOrder = 1
+        end
+      end
+    end
+    object Panel1: TPanel
+      Left = 115
+      Top = 185
+      Width = 650
+      Height = 1
+      BevelOuter = bvNone
+      Caption = 'Informa'#231#245'es do Aluno:'
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 16
+    end
+    object Panel3: TPanel
+      Left = 668
+      Top = 567
+      Width = 97
+      Height = 30
+      BevelOuter = bvNone
+      Color = 16744448
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 17
+      object ia: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 97
+        Height = 30
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'DELETAR'
+        Flat = True
+        OnClick = iaClick
+        ExplicitLeft = 7
+        ExplicitWidth = 130
+        ExplicitHeight = 25
+      end
+    end
+  end
+end

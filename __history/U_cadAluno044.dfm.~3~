@@ -1,0 +1,607 @@
+object frm_cadAluno04: Tfrm_cadAluno04
+  Left = 0
+  Top = 0
+  Caption = 'frm_cadAluno04'
+  ClientHeight = 661
+  ClientWidth = 884
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnMouseWheelDown = FormMouseWheelDown
+  OnMouseWheelUp = FormMouseWheelUp
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 884
+    Height = 661
+    Align = alClient
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitHeight = 877
+    object Panel33: TPanel
+      Left = -3
+      Top = 46
+      Width = 798
+      Height = 0
+      BevelOuter = bvNone
+      Color = clGray
+      ParentBackground = False
+      TabOrder = 0
+    end
+    object Panel27: TPanel
+      Left = 0
+      Top = 0
+      Width = 861
+      Height = 1000
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      object Label14: TLabel
+        Left = 115
+        Top = 155
+        Width = 262
+        Height = 22
+        Caption = 'Informa'#231#245'es dos Documentos:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Panel28: TPanel
+        Left = -3
+        Top = 46
+        Width = 798
+        Height = 0
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object Panel29: TPanel
+        Left = 115
+        Top = 212
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 1
+        object Label15: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'CPF:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 22
+        end
+        object Panel30: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel31: TPanel
+        Left = 115
+        Top = 785
+        Width = 97
+        Height = 30
+        BevelOuter = bvNone
+        Color = 16744448
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 2
+        object SpeedButton1: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 97
+          Height = 30
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = 'PR'#211'XIMO'
+          Flat = True
+          ExplicitTop = 16
+        end
+      end
+      object Panel32: TPanel
+        Left = 242
+        Top = 785
+        Width = 97
+        Height = 30
+        Color = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+        object SpeedButton2: TSpeedButton
+          Left = 1
+          Top = 1
+          Width = 95
+          Height = 28
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = 'ANTERIOR'
+          Flat = True
+          ExplicitLeft = 100
+          ExplicitTop = 0
+          ExplicitWidth = 97
+          ExplicitHeight = 33
+        end
+      end
+      object Panel34: TPanel
+        Left = 115
+        Top = 54
+        Width = 653
+        Height = 72
+        BevelKind = bkFlat
+        BevelOuter = bvNone
+        TabOrder = 4
+        object Label16: TLabel
+          Left = 13
+          Top = 28
+          Width = 159
+          Height = 22
+          Caption = 'Cadastro De Aluno'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+      end
+      object Panel36: TPanel
+        Left = 115
+        Top = 185
+        Width = 650
+        Height = 1
+        BevelOuter = bvNone
+        Caption = 'Informa'#231#245'esda Turma:'
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 5
+      end
+      object Panel37: TPanel
+        Left = 115
+        Top = 294
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 6
+        object Label18: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'ESTADO ONDE FOI EMITIDO:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 132
+        end
+        object Panel38: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel39: TPanel
+        Left = 115
+        Top = 377
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 7
+        object Label19: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'DATA DE EXPEDI'#199#195'O:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 104
+        end
+        object Panel40: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel41: TPanel
+        Left = 115
+        Top = 461
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 8
+        object Label20: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'LIVRO:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 32
+        end
+        object Panel42: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel43: TPanel
+        Left = 331
+        Top = 212
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 9
+        object Label21: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'DATA DE EXPEDI'#199#195'O:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 104
+        end
+        object Panel44: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel45: TPanel
+        Left = 331
+        Top = 294
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 10
+        object Label22: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'DOCUMENTO ESTRANGEIRO:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 135
+        end
+        object Panel46: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel47: TPanel
+        Left = 331
+        Top = 377
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 11
+        object Label23: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = 'RG:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 17
+        end
+        object Panel48: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel49: TPanel
+        Left = 331
+        Top = 461
+        Width = 150
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 12
+        object Label24: TLabel
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 15
+          Align = alTop
+          Caption = #211'RG'#195'O EMISSOR:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 84
+        end
+        object Panel50: TPanel
+          Left = 0
+          Top = 48
+          Width = 150
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel51: TPanel
+        Left = 544
+        Top = 212
+        Width = 221
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 13
+        object Label25: TLabel
+          Left = 0
+          Top = 0
+          Width = 221
+          Height = 15
+          Align = alTop
+          Caption = 'CERTID'#195'O DE NASCIMENTO:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 134
+        end
+        object Panel52: TPanel
+          Left = 0
+          Top = 48
+          Width = 221
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel53: TPanel
+        Left = 544
+        Top = 294
+        Width = 221
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 14
+        object Label26: TLabel
+          Left = 0
+          Top = 0
+          Width = 221
+          Height = 15
+          Align = alTop
+          Caption = 'FOLHA:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 36
+        end
+        object Panel54: TPanel
+          Left = 0
+          Top = 48
+          Width = 221
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel55: TPanel
+        Left = 544
+        Top = 377
+        Width = 221
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 15
+        object Label27: TLabel
+          Left = 0
+          Top = 0
+          Width = 221
+          Height = 15
+          Align = alTop
+          Caption = 'N'#218'MERO DE IDENTIFICA'#199#195'O SOCIAL (NIS/NIT):'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Panel56: TPanel
+          Left = 0
+          Top = 48
+          Width = 221
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object Panel57: TPanel
+        Left = 544
+        Top = 461
+        Width = 221
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 16
+        object Label28: TLabel
+          Left = 0
+          Top = 0
+          Width = 221
+          Height = 15
+          Align = alTop
+          Caption = 'TIPO DE DOCUMENTO:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitWidth = 104
+        end
+        object Panel58: TPanel
+          Left = 0
+          Top = 48
+          Width = 221
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+    end
+    object ScrollBar1: TScrollBar
+      Left = 867
+      Top = 0
+      Width = 17
+      Height = 661
+      HelpContext = 1
+      Align = alRight
+      Kind = sbVertical
+      Max = 1000
+      PageSize = 800
+      TabOrder = 2
+      OnChange = ScrollBar1Change
+      ExplicitTop = -24
+    end
+  end
+end

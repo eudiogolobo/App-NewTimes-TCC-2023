@@ -1,0 +1,184 @@
+unit U_altpesturma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pqaltturma = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Label2: TLabel;
+    lb_total: TLabel;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure FormCreate(Sender: TObject);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure Panel1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pqaltturma: Tfrm_pqaltturma;
+  CodAltDelTurma, AltDelTurma:integer;
+  IDTURMAS1:integer;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm,u_cad_avaliacao,U_pesq_matricula, U_turma_relacao, U_exturma, u_altturma, u_principalpas;
+
+procedure Tfrm_pqaltturma.DBGrid1CellClick(Column: TColumn);
+begin
+if AltDelTurma=1 then
+  begin
+  CodAltDelTurma:= dm.qturmasid_turmas.value;
+
+  frm_altturma := Tfrm_altturma.Create(Self);
+  frm_altturma.Parent:= frm_prncipal.panel2;
+  frm_altturma.Align:= alClient;
+  frm_altturma.BorderStyle:= bsNone;
+  frm_altturma.WindowState :=wsMaximized;
+  frm_altturma.Position :=poMainFormCenter;
+  frm_altturma.Show;
+  end;
+
+  if AltDelTurma=2 then
+  begin
+
+  CodAltDelTurma:= dm.qturmasid_turmas.value;
+
+  frm_exturma := Tfrm_exturma.Create(Self);
+
+  frm_exturma.Parent:= frm_prncipal.panel2;
+  frm_exturma.Align:= alClient;
+  frm_exturma.BorderStyle:= bsNone;
+  frm_exturma.WindowState :=wsMaximized;
+  frm_exturma.Position :=poMainFormCenter;
+  frm_exturma.Show;
+  end;
+
+  if AltDelTurma=3 then
+  begin
+
+  CodAltDelTurma:= dm.qturmasid_turmas.value;
+
+  frm_turma_relacao := Tfrm_turma_relacao.Create(Self);
+
+  frm_turma_relacao.Parent:= frm_prncipal.panel2;
+  frm_turma_relacao.Align:= alClient;
+  frm_turma_relacao.BorderStyle:= bsNone;
+  frm_turma_relacao.WindowState :=wsMaximized;
+  frm_turma_relacao.Position :=poMainFormCenter;
+  frm_turma_relacao.Show;
+  end;
+
+  if AltDelTurma=4 then
+  begin
+  AltDelMatricula:=4;
+  IDTURMAS1:=dm.qturmasid_turmas.Value;
+  frm_pq_matricula := Tfrm_pq_matricula.Create(Self);
+
+  frm_pq_matricula.Parent:= frm_prncipal.panel2;
+  frm_pq_matricula.Align:= alClient;
+  frm_pq_matricula.BorderStyle:= bsNone;
+  frm_pq_matricula.WindowState :=wsMaximized;
+  frm_pq_matricula.Position :=poMainFormCenter;
+  frm_pq_matricula.Show;
+  end;
+
+
+  
+
+
+end;
+
+procedure Tfrm_pqaltturma.DBGrid1MouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_pqaltturma.FormCreate(Sender: TObject);
+begin
+ with dm.qturmas do
+           begin
+           close;
+            sql.clear;
+            sql.Add('select a.id_turmas, a.CursoCod, a.Turma,a.turno, a.dataInicio, a.DataFinal, a.status, b.CursosId, b.Nome ');
+            sql.Add('from turmas as a, cursos as b');
+            sql.Add('where a.CursoCod = b.CursosId ');
+            open;
+            lb_total.Caption:=inttostr(dm.tbturma.RecordCount);
+           end;
+
+
+end;
+
+procedure Tfrm_pqaltturma.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_pqaltturma.Panel1MouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_pqaltturma.SpeedButton1Click(Sender: TObject);
+
+begin
+             with dm.qturmas do
+           begin
+           close;
+            sql.clear;
+            sql.Add('select a.id_turmas, a.CursoCod, a.Turma,a.turno, a.dataInicio, a.DataFinal, a.status, b.CursosId, b.Nome ');
+            sql.Add('from turmas as a, cursos as b');
+            sql.Add('where a.CursoCod = b.CursosId and  a.Turma like ''%'+txt_buscar.Text+'%''');
+            open;
+            lb_total.Caption:=inttostr(dm.tbturma.RecordCount);
+           end;
+
+end;
+
+end.

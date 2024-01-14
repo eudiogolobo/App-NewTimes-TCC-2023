@@ -1,0 +1,80 @@
+unit U_cadAluno044;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno04 = class(TForm)
+    Panel2: TPanel;
+    Panel33: TPanel;
+    Panel27: TPanel;
+    Label14: TLabel;
+    Panel28: TPanel;
+    Panel29: TPanel;
+    Label15: TLabel;
+    Panel30: TPanel;
+    Panel31: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel32: TPanel;
+    SpeedButton2: TSpeedButton;
+    Panel34: TPanel;
+    Label16: TLabel;
+    Panel36: TPanel;
+    Panel37: TPanel;
+    Label18: TLabel;
+    Panel38: TPanel;
+    Panel39: TPanel;
+    Label19: TLabel;
+    Panel40: TPanel;
+    Panel41: TPanel;
+    Label20: TLabel;
+    Panel42: TPanel;
+    Panel43: TPanel;
+    Label21: TLabel;
+    Panel44: TPanel;
+    Panel45: TPanel;
+    Label22: TLabel;
+    Panel46: TPanel;
+    Panel47: TPanel;
+    Label23: TLabel;
+    Panel48: TPanel;
+    Panel49: TPanel;
+    Label24: TLabel;
+    Panel50: TPanel;
+    Panel51: TPanel;
+    Label25: TLabel;
+    Panel52: TPanel;
+    Panel53: TPanel;
+    Label26: TLabel;
+    Panel54: TPanel;
+    Panel55: TPanel;
+    Label27: TLabel;
+    Panel56: TPanel;
+    Panel57: TPanel;
+    Label28: TLabel;
+    Panel58: TPanel;
+    ScrollBar1: TScrollBar;
+    procedure ScrollBar1Change(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno04: Tfrm_cadAluno04;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrm_cadAluno04.ScrollBar1Change(Sender: TObject);
+begin
+panel27.top:= -scrollbar1.position;
+end;
+
+end.

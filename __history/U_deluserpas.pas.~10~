@@ -1,0 +1,112 @@
+unit U_deluserpas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  Tfrm_deluser = class(TForm)
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Label1: TLabel;
+    Panel5: TPanel;
+    DBEdit2: TDBEdit;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    DBEdit1: TDBEdit;
+    Panel6: TPanel;
+    Label3: TLabel;
+    Panel7: TPanel;
+    DBEdit3: TDBEdit;
+    Panel8: TPanel;
+    Label4: TLabel;
+    Panel9: TPanel;
+    DBEdit4: TDBEdit;
+    Panel35: TPanel;
+    Panel36: TPanel;
+    SpeedButton2: TSpeedButton;
+    Panel37: TPanel;
+    SpeedButton4: TSpeedButton;
+    Panel39: TPanel;
+    Label5: TLabel;
+    Panel40: TPanel;
+    Edit1: TEdit;
+    Label17: TLabel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    ia: TSpeedButton;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure iaClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_deluser: Tfrm_deluser;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm, U_pqdeluser;
+
+procedure Tfrm_deluser.iaClick(Sender: TObject);
+begin
+if edit1.Text<>'' then
+    begin
+      dm.tbuser.Open();
+      if dm.tbuser.Locate('id', edit1.text,[]) then
+       begin
+       if MessageDlg('Você deseja excluír esse usuário?',mtConfirmation,[mbyes, mbno],0)=mryes then
+            begin
+           dm.tbcursos.delete;
+           showmessage('Deletado com Sucesso!');
+           dm.FDTransaction1.StartTransaction;
+           dm.FDTransaction1.CommitRetaining;
+
+          end
+           else
+          begin
+          dm.tbuser.Cancel;
+          dm.tbuser.close;
+         end;
+       end
+    end
+    else
+     showmessage('Nenhum ID escrito!');
+
+end;
+
+procedure Tfrm_deluser.SpeedButton1Click(Sender: TObject);
+begin
+if dm.tbuser.Locate('id', edit1.text,[]) then
+ begin
+ if MessageDlg('Você confirma a exclusão desse usuário?',mtConfirmation,[mbyes, mbno],0)=mryes then
+    begin
+    dm.tbuser.delete;
+   showmessage('Excluído com Sucesso!');
+    dm.FDTransaction1.StartTransaction;
+ dm.FDTransaction1.CommitRetaining;
+    end;
+ end
+ else
+ begin
+   dm.tbuser.Cancel;
+   dm.tbuser.CLOSE;
+ end;
+end;
+
+procedure Tfrm_deluser.SpeedButton4Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_pqdeluser,  frm_pqdeluser);
+ frm_pqdeluser.ShowModal;
+end;
+
+end.

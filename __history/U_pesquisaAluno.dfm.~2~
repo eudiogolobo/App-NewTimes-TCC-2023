@@ -1,0 +1,151 @@
+object frm_pesquisaaluno: Tfrm_pesquisaaluno
+  Left = 0
+  Top = 0
+  Caption = 'PESQUISAR ALUNO'
+  ClientHeight = 343
+  ClientWidth = 452
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 452
+    Height = 113
+    Align = alTop
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 48
+      Top = 59
+      Width = 155
+      Height = 13
+      Caption = 'Pesquisar pelo nome do usu'#225'rio:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object txt_buscar: TEdit
+      Left = 40
+      Top = 77
+      Width = 233
+      Height = 21
+      TabOrder = 0
+    end
+    object cbop: TComboBox
+      Left = 295
+      Top = 27
+      Width = 106
+      Height = 21
+      CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = 'TODOS'
+      Items.Strings = (
+        'TODOS')
+    end
+    object rd: TRadioGroup
+      Left = 40
+      Top = 13
+      Width = 233
+      Height = 40
+      Caption = 'Situ'#231#227'o:'
+      Columns = 3
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      Items.Strings = (
+        'Ativos'
+        'Inativos'
+        'Todos')
+      ParentFont = False
+      TabOrder = 2
+    end
+    object Panel3: TPanel
+      Left = 295
+      Top = 77
+      Width = 74
+      Height = 20
+      BevelOuter = bvNone
+      Color = 16744448
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object SpeedButton1: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 74
+        Height = 20
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'Pesquisar'
+        Flat = True
+        ExplicitWidth = 73
+      end
+    end
+    object Panel4: TPanel
+      Left = 375
+      Top = 77
+      Width = 26
+      Height = 20
+      BevelOuter = bvNone
+      Color = 16744448
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 4
+      object SpeedButton2: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 26
+        Height = 20
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = '+ '
+        Flat = True
+        OnClick = SpeedButton2Click
+        ExplicitLeft = 8
+        ExplicitTop = 8
+      end
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = -4
+    Top = 110
+    Width = 465
+    Height = 235
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+end

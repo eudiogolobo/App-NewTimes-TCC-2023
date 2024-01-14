@@ -1,0 +1,93 @@
+unit U_pesqaluser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pqaluser = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    lb_total: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    DBGrid1: TDBGrid;
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pqaluser: Tfrm_pqaluser;
+  AltDelUser:integer;
+
+implementation
+
+{$R *.dfm}
+uses
+ u_principalpas,U_altuser, u_dm, u_deluserpas;
+
+procedure Tfrm_pqaluser.DBGrid1CellClick(Column: TColumn);
+begin
+ if AltDelUser=1 then
+ begin
+
+  frm_altuser := Tfrm_altuser.Create(Self);
+  frm_altuser.Parent:= frm_prncipal.panel2;
+  frm_altuser.Align:= alClient;
+  frm_altuser.BorderStyle:= bsNone;
+  frm_altuser.WindowState :=wsMaximized;
+  frm_altuser.Position :=poMainFormCenter;
+  frm_altuser.Show;
+ end;
+
+  if AltDelUser=2 then
+ begin
+
+  frm_deluser := Tfrm_deluser.Create(Self);
+  frm_deluser.Parent:= frm_prncipal.panel2;
+  frm_deluser.Align:= alClient;
+  frm_deluser.BorderStyle:= bsNone;
+  frm_deluser.WindowState :=wsMaximized;
+  frm_deluser.Position :=poMainFormCenter;
+  frm_deluser.Show;
+ end;
+
+end;
+
+procedure Tfrm_pqaluser.FormCreate(Sender: TObject);
+begin
+ with dm.qusuarios do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from usuarios ');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qusuarios.RecordCount);
+  end;
+end;
+
+procedure Tfrm_pqaluser.SpeedButton1Click(Sender: TObject);
+ begin
+    with dm.qusuarios do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from usuarios where nome like ''%'+txt_buscar.Text+'%''');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qusuarios.RecordCount);
+  end;
+ end;
+
+end.

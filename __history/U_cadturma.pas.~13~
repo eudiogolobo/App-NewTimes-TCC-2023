@@ -1,0 +1,149 @@
+unit U_cadturma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls,u_dm, Data.DB;
+
+type
+  Tfrm_cadturma = class(TForm)
+    Panel2: TPanel;
+    Panel5: TPanel;
+    Label2: TLabel;
+    Panel6: TPanel;
+    DBEdit2: TDBEdit;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    DBEdit1: TDBEdit;
+    Panel29: TPanel;
+    Label15: TLabel;
+    cb2: TDBComboBox;
+    Panel4: TPanel;
+    Label1: TLabel;
+    cb1: TDBComboBox;
+    Panel8: TPanel;
+    Label5: TLabel;
+    cb3: TDBComboBox;
+    Panel35: TPanel;
+    Label4: TLabel;
+    Label17: TLabel;
+    Panel10: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    pnl_alterar: TPanel;
+    btn_alterar: TSpeedButton;
+    pnl_excluir: TPanel;
+    btn_excluir: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_alterarClick(Sender: TObject);
+    procedure btn_incluirClick(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadturma: Tfrm_cadturma;
+
+implementation
+
+{$R *.dfm}
+
+uses
+u_altturma, u_principalpas;
+
+procedure Tfrm_cadturma.btn_alterarClick(Sender: TObject);
+begin
+
+frm_altturma := Tfrm_altturma.Create(Self);
+
+frm_altturma.Parent:= frm_prncipal.panel2;
+frm_altturma.Align:= alClient;
+frm_altturma.BorderStyle:= bsNone;
+frm_altturma.WindowState :=wsMaximized;
+frm_altturma.Position :=poMainFormCenter;
+frm_altturma.Show;
+end;
+
+procedure Tfrm_cadturma.btn_cancelarClick(Sender: TObject);
+begin
+dm.tbturma.Cancel;
+dm.tbturma.close;
+btn_incluir.Enabled:=true;
+
+end;
+
+procedure Tfrm_cadturma.btn_excluirClick(Sender: TObject);
+begin
+frm_exturma:= Tfrm_exturma.Create(Self);
+
+frm_exturma.Parent:= frm_prncipal.panel2;
+frm_exturma.Align:= alClient;
+frm_exturma.BorderStyle:= bsNone;
+frm_exturma.WindowState :=wsMaximized;
+frm_exturma.Position :=poMainFormCenter;
+frm_exturma.Show;
+end;
+
+procedure Tfrm_cadturma.btn_incluirClick(Sender: TObject);
+begin
+dm.tbturma.open();
+dm.tbturma.Append;
+ dbedit2.SetFocus;
+ btn_incluir.Enabled:=false;
+end;
+
+procedure Tfrm_cadturma.btn_salvarClick(Sender: TObject);
+begin
+if (dbedit1.Text='') or (cb1.ItemIndex<=-1) or (cb2.ItemIndex<=-1)  then
+showmessage('Campo obrigatório em braco')
+else
+  begin
+  if dm.tbturma.State in [dsinsert]  then
+   begin
+     dm.tbturma.Post;
+
+
+
+   end;
+   dm.FDTransaction1.StartTransaction;
+   dm.FDTransaction1.CommitRetaining;
+
+   dm.tbturma.close;
+
+   showmessage('Cadastro salvo com sucesso');
+    btn_incluir.Enabled:=true;
+  end;
+end;
+
+procedure Tfrm_cadturma.FormCreate(Sender: TObject);
+begin
+
+dm.tbcursos.open;
+dm.tbturma.close;
+
+
+
+  begin
+    dm.tbcursos.First;
+    while not dm.tbcursos.Eof do
+     begin
+     cb2.Items.Add(dm.tbcursosnome.value);
+     dm.tbcursos.Next;
+     end;
+  end;
+
+end;
+
+end.

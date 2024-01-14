@@ -1,0 +1,114 @@
+unit U_pes_turma_relacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids, u_dm;
+
+type
+  Tfrm_pesqimpturma = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    lb_total: TLabel;
+    Label15: TLabel;
+    Image1: TImage;
+    txt_buscar: TEdit;
+    cbop: TComboBox;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel34: TPanel;
+    DBGrid1: TDBGrid;
+    Label3: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesqimpturma: Tfrm_pesqimpturma;
+
+implementation
+
+{$R *.dfm}
+uses
+U_turma_relacao;
+
+procedure Tfrm_pesqimpturma.DBGrid1CellClick(Column: TColumn);
+begin
+frm_turma_relacao.edit1.Text:=dbgrid1.Fields[0].value;
+frm_turma_relacao.edit1.SetFocus;
+frm_pesqimpturma.Close;
+end;
+
+procedure Tfrm_pesqimpturma.FormCreate(Sender: TObject);
+begin
+dm.tbcursos.Open();
+dm.tbcursos.First;
+ while not dm.tbcursos.Eof do
+ begin
+   cbop.Items.Add(dm.tbcursosNome.value);
+   dm.tbcursos.Next;
+  end;
+
+  with dm.qturmas do
+ begin
+ close;
+ sql.clear;
+ sql.Add('select * from turmas');
+  open;
+ end;
+end;
+
+procedure Tfrm_pesqimpturma.SpeedButton1Click(Sender: TObject);
+ begin
+  if cbop.ItemIndex<>0 then
+    begin
+     with dm.qturmas do
+               begin
+               close;
+                sql.clear;
+                sql.Add('select * from turmas where turma like ''%'+txt_buscar.Text+'%'' and curso = :x');
+                parambyname('x').asstring:=cbop.Text;
+                open;
+                lb_total.Caption:=inttostr(dm.qturmas.RecordCount);
+    end;
+   end
+   else
+     begin
+         if txt_buscar.Text<>'' then
+            begin
+            with dm.qturmas do
+                     begin
+                     close;
+                      sql.clear;
+                      sql.Add('select * from turmas where turma like ''%'+txt_buscar.Text+'%''');
+                      open;
+                      lb_total.Caption:=inttostr(dm.qturmas.RecordCount);
+          end;
+
+         end
+         else
+         begin
+           with dm.qturmas do
+                     begin
+                     close;
+                      sql.clear;
+                      sql.Add('select * from turmas');
+                      open;
+                      lb_total.Caption:=inttostr(dm.qturmas.RecordCount);
+         end;
+
+
+        end;
+
+     end;
+ end;
+
+end.

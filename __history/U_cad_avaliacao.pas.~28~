@@ -1,0 +1,239 @@
+unit U_cad_avaliacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ExtCtrls, u_dm, Data.DB, Vcl.ComCtrls;
+
+type
+  Tfrm_cad_avaliacao = class(TForm)
+    Panel2: TPanel;
+    Label12: TLabel;
+    Panel35: TPanel;
+    Label2: TLabel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    Panel20: TPanel;
+    Panel1: TPanel;
+    Label1: TLabel;
+    ComboBox3: TComboBox;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel9: TPanel;
+    Label15: TLabel;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Label17: TLabel;
+    ComboBox5: TComboBox;
+    Panel3: TPanel;
+    Label6: TLabel;
+    Memo1: TMemo;
+    Label4: TLabel;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel5: TPanel;
+    Edit1: TEdit;
+    Panel6: TPanel;
+    Label7: TLabel;
+    Panel10: TPanel;
+    cb2: TComboBox;
+    Panel8: TPanel;
+    Label8: TLabel;
+    Panel13: TPanel;
+    dtp2: TDateTimePicker;
+    Panel14: TPanel;
+    Label9: TLabel;
+    cb1: TComboBox;
+    Panel15: TPanel;
+    Label10: TLabel;
+    Panel16: TPanel;
+    dtp1: TDateTimePicker;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    Label11: TLabel;
+    cb3: TComboBox;
+    MaskEdit1: TMaskEdit;
+    ComboBox1: TComboBox;
+    ScrollBar1: TScrollBar;
+    procedure FormCreate(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cad_avaliacao: Tfrm_cad_avaliacao;
+
+implementation
+
+{$R *.dfm}
+uses
+U_principalpas, u_altpesturma,u_inicio;
+
+procedure Tfrm_cad_avaliacao.btn_cancelarClick(Sender: TObject);
+begin
+if MessageDlg('Você perderá tudo que já fez, deseja mesmo cancelar?',mtConfirmation,[mbyes, mbno],0)=mryes then
+begin
+        frm_inicio := Tfrm_inicio.Create(self);
+        frm_inicio.Parent:= frm_prncipal.panel2;
+        frm_inicio.Align:= alClient;
+        frm_inicio.BorderStyle:= bsNone;
+        frm_inicio.WindowState :=wsMaximized;
+        frm_inicio.show;
+        showmessage('Cadastro salvo com sucesso');
+end;
+end;
+
+procedure Tfrm_cad_avaliacao.btn_salvarClick(Sender: TObject);
+begin
+if (combobox3.ItemIndex=-1) or (combobox5.ItemIndex=-1) or (combobox1.ItemIndex=-1) or (maskedit1.Text='')then
+ begin
+  showmessage('Campo obrigatório em branco.');
+ end
+ else
+  begin
+
+  with dm.tbavaliacao do
+   begin
+     close;
+     sql.Clear;
+     sql.Add('insert into avaliacao (ProfessorCod ,TurmaCod ,Tipo,ModuloRef,TotalAulas,Descricao,data,hora) values');
+     sql.Add('(:ProfessorCod , :TurmaCod ,:Tipo,:ModuloRef,:TotalAulas,:Descricao,:data,:hora)');
+     parambyname('ProfessorCod').AsInteger:= LOGADOPRO;
+     parambyname('TurmaCod').AsInteger:= dm.qpesq_turma_profid_turmas.value ;
+     parambyname('Tipo').AsString:= combobox1.Text;
+     parambyname('ModuloRef').AsString:=  combobox3.Text;
+     parambyname('TotalAulas').AsString:= combobox5.Text;
+     parambyname('Descricao').AsString:= memo1.Text;
+     parambyname('data').AsDate:= strtodate(maskedit1.Text);
+     parambyname('hora').AsDateTime:= strtotime(FormatDateTime ('hh:mm:ss',now));
+     ExecSQL;
+
+   end;
+
+   with dm.QMATRICULA do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select a.id,a.AlunoCod,a.DataMatricula, a.TurmaCod, a.SituacaoMatricula, b.id_turmas, b.CursoCod, b.Turma, b.Turno,c.id, c.nome, c.data_nasc,c.naturalidade, d.CursosId, d.Nome, d.Formato, e.AlunoCod, e.cpf, f.AlunoCod, f.f1, f.f2');
+      sql.Add('from matricula as a, turmas as b,alunos as c, cursos as d,documentos as e, responsaveis as f');
+      sql.Add('where c.id = a.AlunoCod and b.id_turmas= a.TurmaCod and b.CursoCod = d.CursosId and e.AlunoCod = c.id and f.AlunoCod = c.id AND a.TurmaCod = :codturmas  ');
+      parambyname('codturmas').AsInteger:= dm.qpesq_turma_profid_turmas.value;
+      open;
+    end;
+
+    while not dm.qmatricula.Eof do
+    begin
+     with dm.tbnotas do
+     begin
+       close;
+       sql.Clear;
+       sql.Add('insert into notas (MatriculaCod ,AvaliacaoCod ,Nota) values (:MatriculaCod ,:AvaliacaoCod, :Nota)');
+       parambyname('MatriculaCod').AsInteger:= dm.qmatriculaAlunoCod.value;
+       parambyname('AvaliacaoCod').AsInteger:= dm.qmatriculaAlunoCod.value;
+
+
+       ExecSQL;
+     end;
+
+   end;
+
+
+        frm_inicio := Tfrm_inicio.Create(self);
+        frm_inicio.Parent:= frm_prncipal.panel2;
+        frm_inicio.Align:= alClient;
+        frm_inicio.BorderStyle:= bsNone;
+        frm_inicio.WindowState :=wsMaximized;
+        frm_inicio.show;
+        showmessage('Cadastro salvo com sucesso');
+   end;
+
+end;
+
+procedure Tfrm_cad_avaliacao.FormCreate(Sender: TObject);
+var
+i:integer;
+begin
+maskedit1.Text:=FormatDateTime ('dd/mm/yyyy',now);
+
+dm.tbcursos.Open();
+ dm.tbcursos.First;
+
+ while not dm.tbcursos.Eof do
+ begin
+ cb1.Items.Add(dm.tbcursosnome.Value);
+ dm.tbcursos.Next;
+ end;
+
+ dm.tbcursos.Close;
+// pegando cod do nome do curso
+   with dm.qcursos do
+ begin
+    close;
+    sql.Clear;
+    sql.Add('select * from cursos where CursosId= :codigozin');
+    parambyname('codigozin').aSinteger:= dm.qpesq_turma_profCursoCod.value;
+    open;
+ end;
+
+edit1.Text:= dm.qpesq_turma_profTurma.Text;
+
+ dtp1.Date:=  dm.qpesq_turma_profDataInicio.value;
+
+ dtp2.Date:=  dm.qpesq_turma_profDataFinal.value;
+
+ cb1.ItemIndex:= cb1.Items.IndexOf(dm.qcursosNome.Text);
+
+ cb2.ItemIndex:= cb2.Items.IndexOf(dm.qpesq_turma_profTurno.Text);
+
+ cb3.ItemIndex:= cb3.Items.IndexOf(dm.qpesq_turma_profStatus.Text);
+
+  /// carregando cb de modulos
+
+  for i:=0 to dm.qcursosModulos.Value do
+  begin
+    combobox3.Items.Add(inttostr(i));
+  end;
+
+
+
+
+end;
+
+procedure Tfrm_cad_avaliacao.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_cad_avaliacao.FormMouseWheelUp(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_cad_avaliacao.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+end.

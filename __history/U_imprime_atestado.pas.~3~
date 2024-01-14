@@ -1,0 +1,61 @@
+unit U_imprime_atestado;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, U_imcaluno;
+
+type
+  Tfrm_imprecao_atestadof = class(TForm)
+    imat: TRLReport;
+    RLBand1: TRLBand;
+    RLLabel2: TRLLabel;
+    RLImage1: TRLImage;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLSystemInfo2: TRLSystemInfo;
+    RLLabel1: TRLLabel;
+    RLBand2: TRLBand;
+    Label1: TLabel;
+    Label2: TLabel;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    RLDBText4: TRLDBText;
+    RLDBText5: TRLDBText;
+    RLDBText6: TRLDBText;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_imprecao_atestadof: Tfrm_imprecao_atestadof;
+  ano:string;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm;
+
+procedure Tfrm_imprecao_atestadof.FormCreate(Sender: TObject);
+var
+nome, id, mae, pai, nasc, cidade:string;
+begin
+nome:= rldbtext1.Text;
+id:=   rldbtext2.Text;
+mae:=   rldbtext3.Text;
+pai:=    rldbtext4.Text;
+nasc:=     rldbtext5.Text;
+cidade:=   rldbtext6.Text;
+ano:= formatdatetime('yyyy',now);
+label2.caption:=('Atestamos para os devidos fins que o estudante  '+nome+',matrícula nº '+id+', filho de '+mae+' e de '+ pai+',nascido em '+nasc+', natural de MUNICÍPIO '+cidade+', está frequentando no ano/semestre letivo de '+ano+' o(s) curso(s) abaixo:') ;
+end;
+
+end.

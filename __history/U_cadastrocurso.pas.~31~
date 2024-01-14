@@ -1,0 +1,265 @@
+unit U_cadastrocurso;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
+  Vcl.ExtCtrls, Vcl.Buttons, Data.DB;
+
+type
+  Tfrm_cadcurso = class(TForm)
+    Panel2: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    DBEdit1: TDBEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    DBEdit3: TDBEdit;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel8: TPanel;
+    DBEdit4: TDBEdit;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    DBEdit6: TDBEdit;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Label17: TLabel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    Panel6: TPanel;
+    DBEdit2: TDBEdit;
+    Panel17: TPanel;
+    Label9: TLabel;
+    Panel18: TPanel;
+    DBEdit8: TDBEdit;
+    Panel19: TPanel;
+    Label10: TLabel;
+    Panel20: TPanel;
+    DBEdit9: TDBEdit;
+    Panel21: TPanel;
+    Label11: TLabel;
+    Panel22: TPanel;
+    DBEdit10: TDBEdit;
+    ScrollBar1: TScrollBar;
+    Panel23: TPanel;
+    Label12: TLabel;
+    Panel24: TPanel;
+    DBEdit11: TDBEdit;
+    DBComboBox1: TDBComboBox;
+    Panel12: TPanel;
+    Label8: TLabel;
+    DBComboBox2: TDBComboBox;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure DBEdit3Change(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure Panel2MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadcurso: Tfrm_cadcurso;
+
+implementation
+
+{$R *.dfm}
+uses
+U_dm, u_altcur, U_excurso, u_principalpas,U_inicio;
+
+procedure Tfrm_cadcurso.DBEdit3Change(Sender: TObject);
+begin
+if dbedit3.Text = '' then
+btn_salvar.Enabled:=false
+else
+begin
+ btn_salvar.Enabled:=true;
+btn_cancelar.Enabled:=true;
+end;
+end;
+
+procedure Tfrm_cadcurso.FormCreate(Sender: TObject);
+begin
+dm.tbcursos.close();
+dm.tbcursos.open();
+dm.tbcursos.Append;
+
+
+end;
+
+procedure Tfrm_cadcurso.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_cadcurso.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_cadcurso.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_cadcurso.Panel2MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_cadcurso.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+procedure Tfrm_cadcurso.SpeedButton1Click(Sender: TObject);
+begin
+if (dbedit1.text<>'')  and (dbedit3.text<>'') and (dbedit4.text<>'') and (dbcombobox1.ItemIndex<>-1) and (dbedit6.text<>'') and (dbcombobox2.ItemIndex<>-1) and (dbedit8.text<>'') and (dbedit9.text<>'') and (dbedit10.text<>'')then
+ begin
+  if dm.tbcursos.State in [dsinsert]  then
+   begin
+     dm.tbcursos.Post;
+
+     dm.FDTransaction1.StartTransaction;
+     dm.FDTransaction1.CommitRetaining;
+     dm.tbcursos.close;
+
+     dm.tbcursos.Cancel;
+    dm.tbcursos.close;
+    /// inserindo em acoes
+     dm.tbcursos.Open();
+     dm.tbcursos.last;
+
+      WITH dm.tbControleAcoes do
+     begin
+       close;
+       sql.clear;
+       sql.add('insert into controledeacoes (UsuarioCodCad ,DataCad,HoraCad,CodTabela,id_tabela_ref) values (:UsuarioCodCad ,:DataCad,:HoraCad,:CodTabela,:id_tabela_ref)');
+       parambyname('UsuarioCodCad').asinteger:= logado;
+       parambyname('DataCad').asdate:= date();
+       parambyname('HoraCad').astime:= time() ;
+       parambyname('CodTabela').asinteger:= 2;
+       parambyname('id_tabela_ref').asinteger:= dm.tbcursosCursosId.Value;
+       execsql;
+     end;
+
+    frm_inicio := Tfrm_inicio.Create(self);
+    frm_inicio.Parent:= frm_prncipal.panel2;
+    frm_inicio.Align:= alClient;
+    frm_inicio.BorderStyle:= bsNone;
+    frm_inicio.WindowState :=wsMaximized;
+    frm_inicio.show;
+    showmessage('Cadastro salvo com sucesso');
+   end;
+   end
+    else
+   showmessage('Campo obrigatório em branco')
+end;
+
+procedure Tfrm_cadcurso.SpeedButton2Click(Sender: TObject);
+begin
+dm.tbcursos.open();
+dm.tbcursos.Append;
+
+
+end;
+
+procedure Tfrm_cadcurso.SpeedButton3Click(Sender: TObject);
+begin
+
+if MessageDlg('Você perderá tudo já feito, deseja mesmo continuar?',mtConfirmation,[mbyes, mbno],0)=mryes then
+  begin
+  //////////////////////////////////////////
+      dm.tbcursos.Cancel;
+    dm.tbcursos.close;
+
+    frm_inicio := Tfrm_inicio.Create(self);
+    frm_inicio.Parent:= frm_prncipal.panel2;
+    frm_inicio.Align:= alClient;
+    frm_inicio.BorderStyle:= bsNone;
+    frm_inicio.WindowState :=wsMaximized;
+    frm_inicio.show;
+  end;
+end;
+
+procedure Tfrm_cadcurso.SpeedButton5Click(Sender: TObject);
+begin
+
+
+frm_altCurso := Tfrm_altCurso.Create(Self);
+
+frm_altCurso.Parent:= frm_prncipal.panel2;
+frm_altCurso.Align:= alClient;
+frm_altCurso.BorderStyle:= bsNone;
+frm_altCurso.WindowState :=wsMaximized;
+frm_altCurso.Position :=poMainFormCenter;
+frm_altCurso.Show;
+end;
+
+procedure Tfrm_cadcurso.SpeedButton6Click(Sender: TObject);
+begin
+
+
+frm_excurso := Tfrm_excurso.Create(Self);
+
+frm_excurso.Parent:= frm_prncipal.panel2;
+frm_excurso.Align:= alClient;
+frm_excurso.BorderStyle:= bsNone;
+frm_excurso.WindowState :=wsMaximized;
+frm_excurso.Position :=poMainFormCenter;
+frm_excurso.Show;
+end;
+
+end.

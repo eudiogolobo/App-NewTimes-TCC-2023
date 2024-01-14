@@ -1,0 +1,321 @@
+unit U_lancamento_financeiro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  Tfrm_lancamento_financeiro = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    DBEdit1: TDBEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    DBEdit3: TDBEdit;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    DBEdit5: TDBEdit;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    Label12: TLabel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Label13: TLabel;
+    Label4: TLabel;
+    Panel26: TPanel;
+    Edit1: TEdit;
+    Panel22: TPanel;
+    Label14: TLabel;
+    Panel27: TPanel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Panel28: TPanel;
+    Edit2: TEdit;
+    Panel29: TPanel;
+    Label22: TLabel;
+    Panel30: TPanel;
+    Edit3: TEdit;
+    Panel31: TPanel;
+    Label23: TLabel;
+    dtp1: TDateTimePicker;
+    Panel4: TPanel;
+    Label8: TLabel;
+    dtp2: TDateTimePicker;
+    Label9: TLabel;
+    Edit4: TEdit;
+    Panel5: TPanel;
+    ScrollBar1: TScrollBar;
+    Panel6: TPanel;
+    Label10: TLabel;
+    ComboBox1: TComboBox;
+    procedure FormCreate(Sender: TObject);
+    procedure Edit2Change(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_lancamento_financeiro: Tfrm_lancamento_financeiro;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm,U_financeiro, u_principalpas,u_inicio;
+
+procedure Tfrm_lancamento_financeiro.btn_cancelarClick(Sender: TObject);
+begin
+frm_inicio := Tfrm_inicio.Create(self);
+   frm_inicio.Parent:= frm_prncipal.panel2;
+   frm_inicio.Align:= alClient;
+   frm_inicio.BorderStyle:= bsNone;
+   frm_inicio.WindowState :=wsMaximized;
+   frm_inicio.show;
+end;
+
+procedure Tfrm_lancamento_financeiro.btn_salvarClick(Sender: TObject);
+begin
+if edit1.Text=edit2.Text then
+  begin
+    WITH dm.tbmensalidade do
+             begin
+               close;
+               sql.clear;
+               sql.add('update mensalidade set status = :status, DataPagamento= :DataPagamento where mensalidadeid = :id');
+               parambyname('id').asinteger:= dm.qmensalidademensalidadeid.value;
+               parambyname('status').asstring:= 'PAGO';
+               parambyname('DataPagamento').asdate:= dtp2.Date;
+
+               execsql;
+
+               showmessage('Lançado com sucesso!');
+             end;
+
+
+  end
+  else
+  begin
+   if dm.qmensalidadedatavencimento.value < date then
+   begin
+
+    WITH dm.tbmensalidade do
+             begin
+               close;
+               sql.clear;
+               sql.add('update mensalidade set status = :status, DataPagamento= :DataPagamento where mensalidadeid = :id');
+               parambyname('id').asinteger:= dm.qmensalidademensalidadeid.value;
+               parambyname('status').asstring:= 'INADIMPLENTE';
+               parambyname('DataPagamento').asdate:= strtodate('  /  /    ');
+
+               execsql;
+
+               showmessage('Lançado com sucesso!');
+             end;
+   end
+   else
+   begin
+     WITH dm.tbmensalidade do
+             begin
+               close;
+               sql.clear;
+              sql.add('update mensalidade set status = :status, DataPagamento= :DataPagamento where mensalidadeid = :id');
+               parambyname('id').asinteger:= dm.qmensalidademensalidadeid.value;
+               parambyname('status').asstring:= 'À VENCER';
+               parambyname('DataPagamento').asdate:= strtodate('  /  /    ');
+               execsql;
+
+               showmessage('Lançado com sucesso!');
+
+             end;
+   end;
+
+  end;
+
+frm_financeiro := Tfrm_financeiro.Create(Self);
+
+frm_financeiro.Parent:= frm_prncipal.panel2;
+frm_financeiro.Align:= alClient;
+frm_financeiro.BorderStyle:= bsNone;
+frm_financeiro.WindowState :=wsMaximized;
+frm_financeiro.Position :=poMainFormCenter;
+frm_financeiro.Show;
+
+end;
+
+procedure Tfrm_lancamento_financeiro.ComboBox1Change(Sender: TObject);
+begin
+if combobox1.Text<>'PAGO' then
+begin
+  edit2.Text:='0'
+end
+else
+begin
+  edit2.Text:=edit1.Text;
+end;
+
+  if (dm.qmensalidadedatavencimento.value < date) and  (combobox1.itemindex = 1 )then
+  begin
+    combobox1.ItemIndex:= combobox1.Items.IndexOf(dm.qmensalidadestatus.value);
+
+    showmessage('Impossivel realizar essa operação.');
+
+  end;
+
+  if (dm.qmensalidadedatavencimento.value > date) and  (combobox1.itemindex = 0 )then
+  begin
+    combobox1.ItemIndex:= combobox1.Items.IndexOf(dm.qmensalidadestatus.value);
+
+    showmessage('Impossivel realizar essa operação.');
+
+  end;
+
+
+end;
+
+procedure Tfrm_lancamento_financeiro.Edit2Change(Sender: TObject);
+begin
+if edit2.Text='' then
+begin
+ edit2.Text:='0';
+end
+else
+begin
+edit3.Text:=(formatfloat('#,,0.00', ((strtofloat(edit1.Text)) -  (strtofloat(edit2.Text)))));
+end;
+
+if edit1.Text=edit2.Text then
+begin
+  combobox1.ItemIndex:=2;
+end;
+end;
+
+procedure Tfrm_lancamento_financeiro.FormCreate(Sender: TObject);
+var
+n:string;
+begin
+if dm.qmensalidaden_parcela.value=1 then
+begin
+ n:=' primeira';
+end;
+if dm.qmensalidaden_parcela.value=2 then
+begin
+  n:=' segunda';
+end;
+if dm.qmensalidaden_parcela.value=3 then
+begin
+ n:=' terceira';
+end;
+if dm.qmensalidaden_parcela.value=4 then
+begin
+   n:=' quarta';
+end;
+if dm.qmensalidaden_parcela.value=5 then
+begin
+    n:=' quinta';
+end;
+if dm.qmensalidaden_parcela.value=6 then
+begin
+    n:=' sexta';
+end;
+if dm.qmensalidaden_parcela.value=7 then
+begin
+   n:=' sétima';
+end;
+if dm.qmensalidaden_parcela.value=8 then
+begin
+  n:=' oitava';
+end;
+if dm.qmensalidaden_parcela.value=9 then
+begin
+   n:=' nona';
+end;
+if dm.qmensalidaden_parcela.value=10 then
+begin
+   n:=' décima';
+end;
+if dm.qmensalidaden_parcela.value=11 then
+begin
+   n:=' décima primeira';
+end;
+if dm.qmensalidaden_parcela.value=12 then
+begin
+      n:=' décima segunda';
+end;
+
+
+label12.Caption:= label12.Caption+n+' parcela:';
+combobox1.ItemIndex:= combobox1.Items.IndexOf(dm.qmensalidadestatus.value);
+
+
+
+dbedit1.Text:= dm.qmensalidadenome.value;
+dbedit5.Text:= dm.qmensalidadecpf.value;
+dbedit3.Text:= datetostr(dm.qmensalidadedata_nasc.value);
+
+dtp2.date:= date();
+edit1.Text:= floattostr(dm.qmensalidadevalormensalidade.value);
+edit4.Text:=  dm.qmensalidadeformapagamento.value;
+dtp1.Date:=   dm.qmensalidadedatavencimento.value;
+
+if dm.qmensalidadestatus.Value<>'PAGO' then
+begin
+edit2.Text:=  '0';
+end
+else
+begin
+ edit2.Text:=  edit1.Text;
+end;
+
+edit3.Text:= floattostr((strtofloat(edit1.Text)) -  (strtofloat(edit2.Text)));
+
+
+end;
+
+procedure Tfrm_lancamento_financeiro.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_lancamento_financeiro.FormMouseWheelUp(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_lancamento_financeiro.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+end.

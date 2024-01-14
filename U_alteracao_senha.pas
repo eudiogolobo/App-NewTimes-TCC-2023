@@ -1,0 +1,142 @@
+unit U_alteracao_senha;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls;
+
+type
+  Tfrm_alteracao_senha = class(TForm)
+    Panel2: TPanel;
+    Label2: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    Edit2: TEdit;
+    Panel21: TPanel;
+    Edit3: TEdit;
+    Panel3: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure Panel2MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_alteracao_senha: Tfrm_alteracao_senha;
+
+implementation
+
+{$R *.dfm}
+USES
+u_inicio,u_principalpas,u_dm;
+
+procedure Tfrm_alteracao_senha.btn_cancelarClick(Sender: TObject);
+begin
+if MessageDlg('Você perderá tudo já feito, deseja mesmo continuar?',mtConfirmation,[mbyes, mbno],0)=mryes then
+  begin
+  //////////////////////////////////////////
+
+
+    frm_inicio := Tfrm_inicio.Create(self);
+    frm_inicio.Parent:= frm_prncipal.panel2;
+    frm_inicio.Align:= alClient;
+    frm_inicio.BorderStyle:= bsNone;
+    frm_inicio.WindowState :=wsMaximized;
+    frm_inicio.show;
+  end;
+end;
+
+procedure Tfrm_alteracao_senha.btn_salvarClick(Sender: TObject);
+begin
+if edit1.Text<>edit2.Text then
+showmessage('As senhas digitadas não coincidem!')
+else
+  begin
+    with dm.qusuarios do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select * from usuarios where id= :idusuario and senha = :senha1');
+      parambyname('senha1').asstring:=edit3.Text;
+      parambyname('idusuario').AsInteger:=LOGADO;
+      open;
+
+      if recordcount<>0 then
+      begin
+        with dm.tbuser do
+        begin
+          close;
+          sql.Clear;
+          sql.Add('update usuarios set senha = :senha where id= :iduser');
+          parambyname('senha').asstring:=edit1.Text;
+          parambyname('iduser').AsInteger:=LOGADO;
+          execsql;
+          frm_inicio := Tfrm_inicio.Create(self);
+          frm_inicio.Parent:= frm_prncipal.panel2;
+          frm_inicio.Align:= alClient;
+          frm_inicio.BorderStyle:= bsNone;
+          frm_inicio.WindowState :=wsMaximized;
+          frm_inicio.show;
+
+          showmessage('Senha salva com sucesso!');
+        end;
+      end
+      else
+      begin
+        showmessage('Senha atual inválida.')
+      end;
+    end;
+
+  end;
+end;
+
+procedure Tfrm_alteracao_senha.FormMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_alteracao_senha.Panel2MouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+frm_prncipal.pnl_sub_menu_notas.Visible:=false;
+frm_prncipal.resultado.visible:= false;
+frm_prncipal.origem.visible:= true;
+end;
+
+end.

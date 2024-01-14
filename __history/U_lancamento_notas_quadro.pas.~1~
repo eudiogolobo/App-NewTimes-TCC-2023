@@ -1,0 +1,24 @@
+unit U_lancamento_notas_quadro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  Tfrm_lacamento_notas_quadro = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_lacamento_notas_quadro: Tfrm_lacamento_notas_quadro;
+
+implementation
+
+{$R *.dfm}
+
+end.

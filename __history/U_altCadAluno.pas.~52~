@@ -1,0 +1,887 @@
+unit U_altCadAluno;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.DBCtrls, Vcl.Mask, Data.DB, Vcl.ComCtrls,JPEG;
+
+type
+  Tfrm_altcadaluno = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Label2: TLabel;
+    Label8: TLabel;
+    Label28: TLabel;
+    Label41: TLabel;
+    Label66: TLabel;
+    Label85: TLabel;
+    Label92: TLabel;
+    Label93: TLabel;
+    Label94: TLabel;
+    Label95: TLabel;
+    Label96: TLabel;
+    Label97: TLabel;
+    Label98: TLabel;
+    Image7: TImage;
+    Image8: TImage;
+    Image9: TImage;
+    Image10: TImage;
+    Image11: TImage;
+    Image12: TImage;
+    Label100: TLabel;
+    Label101: TLabel;
+    Label102: TLabel;
+    Label103: TLabel;
+    Label104: TLabel;
+    Label105: TLabel;
+    Panel33: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel8: TPanel;
+    Edit1: TEdit;
+    Panel13: TPanel;
+    Label6: TLabel;
+    cb1: TComboBox;
+    Panel15: TPanel;
+    Label7: TLabel;
+    Panel12: TPanel;
+    Edit40: TEdit;
+    Panel19: TPanel;
+    Label9: TLabel;
+    cb3: TComboBox;
+    Panel21: TPanel;
+    Label10: TLabel;
+    Panel22: TPanel;
+    Edit4: TEdit;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Label18: TLabel;
+    Panel145: TPanel;
+    MaskEdit1: TMaskEdit;
+    Panel27: TPanel;
+    Label13: TLabel;
+    ComboBox10: TComboBox;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    Label12: TLabel;
+    Panel6: TPanel;
+    Edit5: TEdit;
+    Panel25: TPanel;
+    Label15: TLabel;
+    Panel26: TPanel;
+    Edit6: TEdit;
+    Panel9: TPanel;
+    Label4: TLabel;
+    Panel10: TPanel;
+    Edit2: TEdit;
+    Panel14: TPanel;
+    Label11: TLabel;
+    Panel16: TPanel;
+    MaskEdit3: TMaskEdit;
+    Panel17: TPanel;
+    Label14: TLabel;
+    cb19: TComboBox;
+    Panel18: TPanel;
+    Label16: TLabel;
+    cb20: TComboBox;
+    Panel20: TPanel;
+    Label19: TLabel;
+    Panel23: TPanel;
+    Edit8: TEdit;
+    Panel24: TPanel;
+    Label20: TLabel;
+    cb4: TComboBox;
+    Panel28: TPanel;
+    Label21: TLabel;
+    Panel29: TPanel;
+    Edit9: TEdit;
+    Panel30: TPanel;
+    Label22: TLabel;
+    cb5: TComboBox;
+    Panel31: TPanel;
+    Label23: TLabel;
+    Panel32: TPanel;
+    Edit10: TEdit;
+    Panel34: TPanel;
+    Label24: TLabel;
+    Edit11: TEdit;
+    Panel36: TPanel;
+    Panel37: TPanel;
+    Panel38: TPanel;
+    Label25: TLabel;
+    Panel39: TPanel;
+    Edit12: TEdit;
+    Panel40: TPanel;
+    Label26: TLabel;
+    ComboBox3: TComboBox;
+    Panel41: TPanel;
+    Label27: TLabel;
+    RadioButton2: TRadioButton;
+    RadioButton1: TRadioButton;
+    Panel42: TPanel;
+    Panel43: TPanel;
+    Label29: TLabel;
+    Panel44: TPanel;
+    Edit13: TEdit;
+    Panel45: TPanel;
+    Label30: TLabel;
+    cb10: TComboBox;
+    Panel46: TPanel;
+    Label31: TLabel;
+    Panel47: TPanel;
+    Edit14: TEdit;
+    Panel48: TPanel;
+    Label32: TLabel;
+    Panel49: TPanel;
+    Edit15: TEdit;
+    Panel50: TPanel;
+    Label33: TLabel;
+    Panel51: TPanel;
+    Edit16: TEdit;
+    Panel52: TPanel;
+    Label34: TLabel;
+    cb9: TComboBox;
+    Panel53: TPanel;
+    Label35: TLabel;
+    Panel54: TPanel;
+    MaskEdit2: TMaskEdit;
+    Panel55: TPanel;
+    Label36: TLabel;
+    cb6: TComboBox;
+    Panel56: TPanel;
+    Label37: TLabel;
+    dtp1: TDateTimePicker;
+    Panel57: TPanel;
+    Label38: TLabel;
+    Panel58: TPanel;
+    Edit18: TEdit;
+    Panel59: TPanel;
+    Label39: TLabel;
+    dtp2: TDateTimePicker;
+    Panel60: TPanel;
+    Label40: TLabel;
+    Panel61: TPanel;
+    Edit19: TEdit;
+    Panel62: TPanel;
+    Panel63: TPanel;
+    Label42: TLabel;
+    CheckBox1: TCheckBox;
+    Panel64: TPanel;
+    Label43: TLabel;
+    Panel65: TPanel;
+    Panel66: TPanel;
+    Label44: TLabel;
+    Panel67: TPanel;
+    Edit21: TEdit;
+    Panel68: TPanel;
+    Label45: TLabel;
+    Panel69: TPanel;
+    Edit22: TEdit;
+    Panel70: TPanel;
+    Label46: TLabel;
+    Panel71: TPanel;
+    Edit23: TEdit;
+    Panel72: TPanel;
+    Label47: TLabel;
+    RadioButton3: TRadioButton;
+    RadioButton4: TRadioButton;
+    Panel73: TPanel;
+    Label48: TLabel;
+    dtp4: TDateTimePicker;
+    Panel74: TPanel;
+    Label49: TLabel;
+    Panel75: TPanel;
+    Edit24: TEdit;
+    Panel76: TPanel;
+    Label50: TLabel;
+    CheckBox2: TCheckBox;
+    Panel77: TPanel;
+    Label51: TLabel;
+    Panel78: TPanel;
+    Panel79: TPanel;
+    Label52: TLabel;
+    Panel80: TPanel;
+    Edit26: TEdit;
+    Panel81: TPanel;
+    Label53: TLabel;
+    Panel82: TPanel;
+    Edit27: TEdit;
+    Panel83: TPanel;
+    Label54: TLabel;
+    dtp5: TDateTimePicker;
+    Panel84: TPanel;
+    Label55: TLabel;
+    RadioButton5: TRadioButton;
+    RadioButton6: TRadioButton;
+    Panel85: TPanel;
+    Label56: TLabel;
+    Panel86: TPanel;
+    Edit28: TEdit;
+    Panel87: TPanel;
+    Label57: TLabel;
+    Panel88: TPanel;
+    Edit29: TEdit;
+    Panel89: TPanel;
+    Label58: TLabel;
+    Panel90: TPanel;
+    Edit30: TEdit;
+    Panel91: TPanel;
+    Label59: TLabel;
+    Panel92: TPanel;
+    Edit31: TEdit;
+    Panel93: TPanel;
+    Label60: TLabel;
+    Panel94: TPanel;
+    Panel95: TPanel;
+    Label61: TLabel;
+    Panel96: TPanel;
+    Edit33: TEdit;
+    Panel97: TPanel;
+    Label62: TLabel;
+    Panel98: TPanel;
+    Edit34: TEdit;
+    Panel99: TPanel;
+    Label63: TLabel;
+    Panel100: TPanel;
+    Edit35: TEdit;
+    Panel101: TPanel;
+    Label64: TLabel;
+    Panel102: TPanel;
+    Edit36: TEdit;
+    Panel103: TPanel;
+    Label65: TLabel;
+    Panel104: TPanel;
+    Edit37: TEdit;
+    Panel105: TPanel;
+    Panel106: TPanel;
+    Label67: TLabel;
+    RadioButton7: TRadioButton;
+    RadioButton8: TRadioButton;
+    RadioButton9: TRadioButton;
+    RadioButton10: TRadioButton;
+    Panel107: TPanel;
+    Label68: TLabel;
+    RadioButton11: TRadioButton;
+    RadioButton12: TRadioButton;
+    Panel108: TPanel;
+    Label69: TLabel;
+    CheckBox3: TCheckBox;
+    Panel109: TPanel;
+    Label70: TLabel;
+    CheckBox4: TCheckBox;
+    Panel110: TPanel;
+    Label71: TLabel;
+    CheckBox6: TCheckBox;
+    Panel111: TPanel;
+    Label72: TLabel;
+    CheckBox8: TCheckBox;
+    Panel112: TPanel;
+    Label73: TLabel;
+    ComboBox7: TComboBox;
+    Panel113: TPanel;
+    Label74: TLabel;
+    Panel114: TPanel;
+    Edit38: TEdit;
+    Panel115: TPanel;
+    Label75: TLabel;
+    CheckBox5: TCheckBox;
+    Panel116: TPanel;
+    Label76: TLabel;
+    CheckBox7: TCheckBox;
+    Panel117: TPanel;
+    Label77: TLabel;
+    CheckBox9: TCheckBox;
+    Panel118: TPanel;
+    Label78: TLabel;
+    CheckBox10: TCheckBox;
+    Panel119: TPanel;
+    Label79: TLabel;
+    CheckBox11: TCheckBox;
+    Panel120: TPanel;
+    Label80: TLabel;
+    CheckBox12: TCheckBox;
+    Panel121: TPanel;
+    Label81: TLabel;
+    CheckBox13: TCheckBox;
+    Panel122: TPanel;
+    Label82: TLabel;
+    Memo1: TMemo;
+    Panel123: TPanel;
+    Label83: TLabel;
+    Memo2: TMemo;
+    Panel124: TPanel;
+    Label84: TLabel;
+    RadioButton13: TRadioButton;
+    RadioButton14: TRadioButton;
+    Panel125: TPanel;
+    Panel126: TPanel;
+    Label86: TLabel;
+    Panel127: TPanel;
+    Edit39: TEdit;
+    Panel128: TPanel;
+    Label87: TLabel;
+    RadioButton15: TRadioButton;
+    RadioButton16: TRadioButton;
+    Panel129: TPanel;
+    Label88: TLabel;
+    RadioButton17: TRadioButton;
+    RadioButton18: TRadioButton;
+    Panel130: TPanel;
+    Label89: TLabel;
+    cb8: TComboBox;
+    Panel131: TPanel;
+    Label90: TLabel;
+    RadioButton19: TRadioButton;
+    RadioButton20: TRadioButton;
+    Panel132: TPanel;
+    Label91: TLabel;
+    cb11: TComboBox;
+    Panel133: TPanel;
+    Panel134: TPanel;
+    Image1: TImage;
+    SpeedButton3: TSpeedButton;
+    Panel135: TPanel;
+    Panel136: TPanel;
+    Image2: TImage;
+    SpeedButton4: TSpeedButton;
+    Panel137: TPanel;
+    Panel138: TPanel;
+    Image3: TImage;
+    SpeedButton5: TSpeedButton;
+    Panel139: TPanel;
+    Panel140: TPanel;
+    Image4: TImage;
+    SpeedButton6: TSpeedButton;
+    Panel141: TPanel;
+    Panel142: TPanel;
+    Image5: TImage;
+    SpeedButton7: TSpeedButton;
+    Panel143: TPanel;
+    Panel144: TPanel;
+    Image6: TImage;
+    SpeedButton8: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    Panel11: TPanel;
+    SpeedButton1: TSpeedButton;
+    ScrollBar1: TScrollBar;
+    opd_rg: TOpenDialog;
+    OPD_cpf: TOpenDialog;
+    opd_certidao_nasc: TOpenDialog;
+    opd_foto: TOpenDialog;
+    opd_comp_residencia: TOpenDialog;
+    opd_vacina: TOpenDialog;
+    MaskEdit4: TMaskEdit;
+    MaskEdit5: TMaskEdit;
+    MaskEdit6: TMaskEdit;
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton10Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ScrollBar2Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_altcadaluno: Tfrm_altcadaluno;
+  codalt,indice_img_alt:integer;
+
+
+implementation
+
+{$R *.dfm}
+uses
+U_dm,U_cadastroAluno, U_pqal, U_busca_img_rg;
+
+procedure Tfrm_altcadaluno.FormCreate(Sender: TObject);
+begin
+save_rg2:=false;
+
+save_cpf2:=false;
+
+save_crt_nasc2:=false;
+
+save_foto2:=false;
+
+save_comp_residencia2:=false;
+
+save_crt_vacina2:=false;
+
+label100.Visible:=false;
+
+label101.Visible:=false;
+
+label102.Visible:=false;
+
+label103.Visible:=false;
+
+label104.Visible:=false;
+
+label105.Visible:=false;
+
+image7.Visible:=false;
+
+image8.Visible:=false;
+
+image9.Visible:=false;
+
+image10.Visible:=false;
+
+image11.Visible:=false;
+
+image12.Visible:=false;
+
+indice_img_alt:=0;
+indice_img:=0;
+
+////////////// CARREGANDO INFO. PESSOAIS ///////////////////////
+with dm.qalunos do
+  begin
+    close;
+    sql.Clear;
+    sql.Add('Select * from alunos where id = :codd');
+    parambyname('codd').asinteger:=codalt;
+    open;
+    edit1.Text:=(dm.qalunosnome.text);
+    maskedit1.Text:=datetostr(dm.qalunosdata_nasc.value);
+    edit40.Text:=(dm.qalunosnacionalidade.text);
+    edit4.Text:=(dm.qalunosnaturalidade.text);
+    edit2.Text:=(dm.qalunosemail.text);
+    edit5.Text:=(dm.qalunoscelular.text);
+    edit6.Text:=(dm.qalunostelresidencial.text);
+    //////////////////////////
+    if (dm.qalunossexo.text)='MASCULINO' then
+    combobox10.ItemIndex:=0
+    else
+    combobox10.ItemIndex:=1;
+    ////////////////////////
+
+    if (dm.qalunosestado_civil.text)='(NENHUM)' then
+    cb3.ItemIndex:=0;
+
+    if (dm.qalunosestado_civil.text)='SOLTEIRO(A)' then
+    cb3.ItemIndex:=1;
+
+    if (dm.qalunosestado_civil.text)='CASADO(A)' then
+    cb3.ItemIndex:=2;
+
+    if (dm.qalunosestado_civil.text)='VIÚVO(A)' then
+    cb3.ItemIndex:=3;
+
+    if (dm.qalunosestado_civil.text)='SEPARADO(A)' then
+    cb3.ItemIndex:=4;
+
+    if (dm.qalunosestado_civil.text)='DIVORCIADO(A)' then
+    cb3.ItemIndex:=5;
+
+    if (dm.qalunosestado_civil.text)='CONTRATUAL' then
+    cb3.ItemIndex:=6;
+  /////////////////////////////////////////
+     if (dm.qalunoscor_raca.text)='NÃO DECLARADA' then
+    cb1.ItemIndex:=0;
+
+       if (dm.qalunoscor_raca.text)='BRANCA' then
+    cb1.ItemIndex:=1;
+
+       if (dm.qalunoscor_raca.text)='PRETA' then
+    cb1.ItemIndex:=2;
+
+       if (dm.qalunoscor_raca.text)='PARDA' then
+    cb1.ItemIndex:=3;
+
+       if (dm.qalunoscor_raca.text)='AMARELA' then
+    cb1.ItemIndex:=4;
+
+       if (dm.qalunoscor_raca.text)='INDÍGENA' then
+    cb1.ItemIndex:=5;
+
+  end;
+
+/////////////////////// CARREGANDO ENDEREÇO /////////////////
+
+ begin
+   with dm.qendereco do
+   begin
+     close;
+     sql.Clear;
+     sql.Add('select * from endereco where AlunoCod= :AlunoCod');
+     parambyname('AlunoCod').AsInteger:=codalt;
+     open;
+
+     maskedit3.Text:=(dm.qenderecocep.Text);
+     edit11.text:=(dm.qenderecolog.Text);
+     edit12.text:=(dm.qendereconumero.Text);
+     edit10.text:=(dm.qenderecocomplemento.Text);
+     edit8.text:=(dm.qenderecopt_ref.Text);
+     edit9.text:=(dm.qenderecobairro.Text);
+     // PAÍS
+     if (dm.qenderecopais.Text)='BRASIL' then
+     cb4.ItemIndex:=0;
+
+     // ESTADO
+     if (dm.qenderecoestado.Text)='SC' then
+     cb19.ItemIndex:=0;
+
+     // MUNICÍPIO
+     if (dm.qenderecomunicipio.Text)='CRICIÚMA' then
+     cb5.ItemIndex:=0;
+     if (dm.qenderecoMUNICIPIO.Text)='IÇARA' then
+     cb5.ItemIndex:=1;
+
+     // TIPO LOGRADOURO
+     if (dm.qenderecotp_log.Text)='RUA' then
+     cb20.ItemIndex:=0;
+     if (dm.qenderecotp_log.Text)='QUADRA' then
+     cb20.ItemIndex:=1;
+
+     // TIPO DE MORADIA
+     if (dm.qenderecotp_MORA.Text)='CASA' then
+     COMBOBOX3.ItemIndex:=0;
+     if (dm.qenderecotp_MORA.Text)='HOTEL' then
+     COMBOBOX3.ItemIndex:=1;
+     if (dm.qenderecotp_MORA.Text)='APARTAMENTO' then
+     COMBOBOX3.ItemIndex:=2;
+
+     // ZONA MORADIA
+     if (dm.qenderecoZONA.Text)='URBANA' then
+     RADIOBUTTON1.Checked:=TRUE;
+     if (dm.qenderecoZONA.Text)='RURAL' then
+     RADIOBUTTON1.CHECKED:=TRUE;
+
+
+
+
+   end;
+ end;
+
+ ///////// CARREGANDO DOCUMENTOS ///////////
+ BEGIN
+   with dm.qdocumentos do
+   begin
+     close;
+     sql.clear;
+     sql.add('Select * from documentos where AlunoCod= :Aluno');
+     parambyname('Aluno').asinteger:=codalt;
+     open;
+
+     maskedit2.Text:=(dm.qdocumentoscpf.text);
+     edit13.Text:=(dm.qdocumentosrg.text);
+
+
+
+
+
+   end;
+ END;
+
+ ////// CARREGANDO RESPONSAVEIS ////////////
+  BEGIN
+   with dm.qresponsaveis do
+   begin
+     close;
+     sql.clear;
+     sql.add('Select * from responsaveis where AlunoCod= :Aluno');
+     parambyname('Aluno').asinteger:=codalt;
+     open;
+
+     edit23.Text:=(dm.qresponsaveisf1.text);
+
+     //falecido f1
+     if (dm.qresponsaveisf1falecido.text)='SIM' then
+     checkbox1.checked:=true;
+
+     // Identificação f1
+     if (dm.qresponsaveisf1id.text)='MÃE' then
+     begin
+     radiobutton3.checked:=true; //mae
+     radiobutton6.checked:=true;  //pai
+     radiobutton4.checked:=false;
+     radiobutton5.checked:=false
+     end
+     else
+     begin
+     radiobutton4.checked:=true;  //mae
+     radiobutton5.checked:=true;  //pai
+     radiobutton3.checked:=false;
+     radiobutton6.checked:=false;
+     end;
+
+     maskedit4.Text:=(dm.qresponsaveisf1cpf.Text);
+
+     dtp4.date:=(dm.qresponsaveisf1nasc.Value);
+
+     edit21.Text:=(dm.qresponsaveisf1email.text);
+
+     edit24.Text:=(dm.qresponsaveisf1ddd.text);
+     edit22.Text:=(dm.qresponsaveisf1cell.text);
+     // f2
+
+     edit27.Text:=(dm.qresponsaveisf2.text);
+      //falecido f2
+     if (dm.qresponsaveisf2falecido.text)='SIM' then
+     checkbox2.checked:=true;
+
+     maskedit5.Text:=(dm.qresponsaveisf2cpf.Text);
+
+     dtp5.date:=(dm.qresponsaveisf2nasc.Value);
+     edit26.Text:=(dm.qresponsaveisf2email.text);
+     edit36.Text:=(dm.qresponsaveisf2ddd.text);
+     edit35.Text:=(dm.qresponsaveisf2cell.text);
+
+     //resp. legal
+     edit31.Text:=(dm.qresponsaveisresplegal.text);
+     maskedit6.Text:= (dm.qresponsaveislegalcpf.text);
+     edit28.Text:=(dm.qresponsaveislegalemail.text);
+     edit33.Text:=(dm.qresponsaveislegalddd.text);
+      edit29.Text:=(dm.qresponsaveislegalcell.text);
+
+      // parente
+       edit34.Text:=(dm.qresponsaveisparente.text);
+       edit30.Text:=(dm.qresponsaveisparenteddd.text);
+       edit37.Text:=(dm.qresponsaveisparentecell.text);
+
+   end;
+ END;
+
+ ////// CARREGANDO SAÚDE ////////////
+  BEGIN
+   with dm.qsaude do
+   begin
+     close;
+     sql.clear;
+     sql.add('Select * from saude where AlunoCod= :Aluno');
+     parambyname('Aluno').asinteger:=codalt;
+     open;
+
+     // ESPECIAL
+     if (dm.qsaudeespecial.Text)='SIM' then
+     combobox7.itemindex:=0
+     else
+     combobox7.itemindex:=1;
+
+     // TIPO SANGUE
+     if (dm.qsaudetiposanguineo.Text)='A' then
+     radiobutton7.Checked:=true;
+     if (dm.qsaudetiposanguineo.Text)='B' then
+     radiobutton8.Checked:=true;
+     if (dm.qsaudetiposanguineo.Text)='O' then
+     radiobutton9.Checked:=true;
+     if (dm.qsaudetiposanguineo.Text)='AB' then
+     radiobutton10.Checked:=true;
+
+     edit38.Text:=(dm.qsaudeplanosaude.Text);
+
+     // FATOR SANGUE
+     if (dm.qsaudefatorsanguineo.Text)='POSITIVO' then
+     radiobutton11.Checked:=true;
+     if (dm.qsaudefatorsanguineo.Text)='NEGATIVO' then
+     radiobutton12.Checked:=true;
+
+     // lactose
+     if (dm.qsaudeintlactose.Text)='SIM' then
+     checkbox5.Checked:=true;
+     //gluten
+     if (dm.qsaudeintgluten.Text)='SIM' then
+     checkbox3.Checked:=true;
+     //hipertenção
+     if (dm.qsaudehipertencao.Text)='SIM' then
+     checkbox7.Checked:=true;
+      //diabetes
+     if (dm.qsaudediabetes.Text)='SIM' then
+     checkbox4.Checked:=true;
+      //picada insetos
+     if (dm.qsaudealergiapcdinsetos.Text)='SIM' then
+     checkbox9.Checked:=true;
+     //chocolate
+     if (dm.qsaudealergiachocolate.Text)='SIM' then
+     checkbox6.Checked:=true;
+     //ovo
+     if (dm.qsaudealergiaovo.Text)='SIM' then
+     checkbox10.Checked:=true;
+     // pelo animal
+     if (dm.qsaudealergiapeloanimal.Text)='SIM' then
+     checkbox8.Checked:=true;
+      // poeira
+     if (dm.qsaudealergiapoeira.Text)='SIM' then
+     checkbox12.Checked:=true;
+      // rinite
+     if (dm.qsauderinite.Text)='SIM' then
+     checkbox11.Checked:=true;
+      // outros
+     if (dm.qsaudeoutros.Text)='SIM' then
+     checkbox13.Checked:=true;
+
+     memo1.Text:=(dm.qsaudeoutrasobs.text);
+     memo2.Text:=(dm.qsaudeusomedicamentos.text);
+
+     // gp risco covid
+     if (dm.qsaudegpcovid.Text)='SIM' then
+     begin
+     radiobutton13.Checked:=true;
+     radiobutton14.Checked:=false;
+     end
+     else
+     begin
+     radiobutton13.Checked:=false;
+     radiobutton14.Checked:=true;
+     end;
+
+
+
+
+
+
+
+
+
+   end;
+ END;
+
+
+end;
+
+procedure Tfrm_altcadaluno.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_altcadaluno.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_altcadaluno.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+procedure Tfrm_altcadaluno.ScrollBar2Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton10Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_pqal,  frm_pqal);
+ frm_pqal.ShowModal;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton1Click(Sender: TObject);
+var
+jpg1, jpg2, jpg3, jpg4, jpg5, jpg6 : TJpegImage;
+begin
+/////////////////// ADD ANEXO DOC //////////////
+
+        begin
+         jpg1 := TJpegImage.Create;
+         jpg1.LoadFromFile(OPD_rg.FileName);
+
+         jpg2 := TJpegImage.Create;
+         jpg2.LoadFromFile(OPD_cpf.FileName);
+
+         jpg3 := TJpegImage.Create;
+         jpg3.LoadFromFile(opd_certidao_nasc.FileName);
+
+         jpg4 := TJpegImage.Create;
+         jpg4.LoadFromFile(opd_foto.FileName);
+
+         jpg5 := TJpegImage.Create;
+         jpg5.LoadFromFile(opd_comp_residencia.FileName);
+
+         jpg6 := TJpegImage.Create;
+         jpg6.LoadFromFile(opd_vacina.FileName);
+
+
+
+         with dm.tbanexo do
+         begin
+           close;
+           sql.Clear;
+           sql.Add('update anexo_documentos set rg = :rg,cpf= :cpf,certidaonasc= :certidaonasc,fotopessoal= :fotopessoal,compresidencia= :compresidencia,crtvacina= :crtvacina where AlunoCod = :AlunoCod');
+           ParamByname('rg').Assign(jpg1);
+           ParamByname('AlunoCod').asinteger:=(codalt);
+           ParamByname('cpf').Assign(jpg2);
+           ParamByname('certidaonasc').Assign(jpg3);
+           ParamByname('fotopessoal').Assign(jpg4);
+           ParamByname('compresidencia').Assign(jpg5);
+           ParamByname('crtvacina').Assign(jpg6);
+           execsql;
+
+
+
+         end;
+
+
+        end;
+
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton3Click(Sender: TObject);
+begin
+indice_img_alt:=1;
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton4Click(Sender: TObject);
+begin
+indice_img_alt:=2;
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton5Click(Sender: TObject);
+begin
+indice_img_alt:=3;
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton6Click(Sender: TObject);
+begin
+indice_img_alt:=4;
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton7Click(Sender: TObject);
+begin
+indice_img_alt:=5;
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+procedure Tfrm_altcadaluno.SpeedButton8Click(Sender: TObject);
+begin
+indice_img_alt:=6;
+application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+frm_busca_img_rg.showmodal;
+end;
+
+end.

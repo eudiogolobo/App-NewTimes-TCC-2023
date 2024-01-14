@@ -1,0 +1,175 @@
+unit U_cadAluno04;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno04 = class(TForm)
+    Panel2: TPanel;
+    Panel33: TPanel;
+    Panel27: TPanel;
+    Label14: TLabel;
+    Panel28: TPanel;
+    Panel34: TPanel;
+    Label16: TLabel;
+    Panel36: TPanel;
+    Panel51: TPanel;
+    Label25: TLabel;
+    Panel52: TPanel;
+    Panel53: TPanel;
+    Label26: TLabel;
+    Panel54: TPanel;
+    Panel55: TPanel;
+    Label27: TLabel;
+    Panel56: TPanel;
+    Panel57: TPanel;
+    Label28: TLabel;
+    Panel58: TPanel;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Label2: TLabel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Label3: TLabel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Label4: TLabel;
+    Panel9: TPanel;
+    Panel10: TPanel;
+    Label5: TLabel;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Label6: TLabel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    Label7: TLabel;
+    Panel15: TPanel;
+    Panel16: TPanel;
+    Label8: TLabel;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    Label9: TLabel;
+    Panel19: TPanel;
+    Panel20: TPanel;
+    Label10: TLabel;
+    Panel21: TPanel;
+    Panel22: TPanel;
+    Label11: TLabel;
+    Panel23: TPanel;
+    Panel24: TPanel;
+    Label12: TLabel;
+    Panel25: TPanel;
+    Panel26: TPanel;
+    Label13: TLabel;
+    Panel29: TPanel;
+    Panel30: TPanel;
+    Label15: TLabel;
+    Panel35: TPanel;
+    Panel37: TPanel;
+    Label17: TLabel;
+    Panel38: TPanel;
+    Panel39: TPanel;
+    Label18: TLabel;
+    Panel40: TPanel;
+    Panel41: TPanel;
+    Label19: TLabel;
+    Panel42: TPanel;
+    Panel43: TPanel;
+    Label20: TLabel;
+    Panel44: TPanel;
+    Panel45: TPanel;
+    Label21: TLabel;
+    Panel46: TPanel;
+    Panel47: TPanel;
+    Label22: TLabel;
+    Panel48: TPanel;
+    ScrollBar1: TScrollBar;
+    Panel31: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel32: TPanel;
+    SpeedButton2: TSpeedButton;
+    procedure btn_salvarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno04: Tfrm_cadAluno04;
+
+implementation
+
+{$R *.dfm}
+uses
+U_principalpas,U_cadAluno04,U_cadAluno03;
+
+procedure Tfrm_cadAluno04.btn_salvarClick(Sender: TObject);
+begin
+  frm_cadAluno05 := Tfrm_cadAluno05.Create(self);
+frm_cadAluno05.Parent:= frm_prncipal.panel2;
+frm_cadAluno05.Align:= alClient;
+frm_cadAluno05.BorderStyle:= bsNone;
+frm_cadAluno05.WindowState :=wsMaximized;
+frm_cadAluno05.show;
+end;
+
+procedure Tfrm_cadAluno04.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.position<>700 then
+begin
+scrollbar1.position:=scrollbar1.position+10;
+panel27.top:= -scrollbar1.position;
+end;
+end;
+
+procedure Tfrm_cadAluno04.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.position<>0 then
+begin
+scrollbar1.position:=scrollbar1.position-10;
+panel27.top:= -scrollbar1.position;
+end;
+end;
+
+procedure Tfrm_cadAluno04.ScrollBar1Change(Sender: TObject);
+begin
+panel27.top:= -scrollbar1.position;
+end;
+
+procedure Tfrm_cadAluno04.SpeedButton1Click(Sender: TObject);
+begin
+    frm_cadAluno05 := Tfrm_cadAluno05.Create(self);
+frm_cadAluno05.Parent:= frm_prncipal.panel2;
+frm_cadAluno05.Align:= alClient;
+frm_cadAluno05.BorderStyle:= bsNone;
+frm_cadAluno05.WindowState :=wsMaximized;
+frm_cadAluno05.show;
+end;
+
+procedure Tfrm_cadAluno04.SpeedButton2Click(Sender: TObject);
+begin
+frm_cadAluno03 := Tfrm_cadAluno03.Create(self);
+ frm_cadAluno03.Parent:= frm_prncipal.panel2;
+ frm_cadAluno03.Align:= alClient;
+ frm_cadAluno03.BorderStyle:= bsNone;
+ frm_cadAluno03.WindowState :=wsMaximized;
+ frm_cadAluno03.show;
+end;
+
+end.

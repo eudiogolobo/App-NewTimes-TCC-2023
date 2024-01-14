@@ -1,0 +1,61 @@
+unit U_pesquisaCurso;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+
+type
+  Tfrm_pesquisacurso = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    DBGrid1: TDBGrid;
+    Label2: TLabel;
+    lb_total: TLabel;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesquisacurso: Tfrm_pesquisacurso;
+
+
+implementation
+
+{$R *.dfm}
+uses
+U_dm, U_cadastrocurso;
+
+procedure Tfrm_pesquisacurso.SpeedButton1Click(Sender: TObject);
+begin
+  begin
+    with dm.qcursos do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from cursos where nome like ''%'+txt_buscar.Text+'%''');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qalunos.RecordCount);
+  end;
+ end;
+end;
+
+procedure Tfrm_pesquisacurso.SpeedButton2Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_cadcurso,frm_cadcurso);
+frm_cadcurso.ShowModal;
+frm_pesquisacurso.close;
+
+end;
+
+end.

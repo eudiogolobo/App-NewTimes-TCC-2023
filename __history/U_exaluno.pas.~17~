@@ -1,0 +1,155 @@
+unit U_exaluno;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask;
+
+type
+  Tfrm_exaluno = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel8: TPanel;
+    Edit1: TEdit;
+    Panel15: TPanel;
+    Label7: TLabel;
+    Panel12: TPanel;
+    Edit40: TEdit;
+    Panel19: TPanel;
+    Label9: TLabel;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Label18: TLabel;
+    MaskEdit1: TMaskEdit;
+    Panel27: TPanel;
+    Label13: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    pnl_salvar: TPanel;
+    btn_cancelar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_excluir: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_exaluno: Tfrm_exaluno;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm, U_pqexaluno,u_pqal, U_inicio,u_principalpas;
+
+procedure Tfrm_exaluno.btn_excluirClick(Sender: TObject);
+begin
+
+if MessageDlg('Deseja mesmo deletar este aluno?',mtConfirmation,[mbyes, mbno],0)=mryes then
+  begin
+
+   // excluindo anexos de documetos
+    with dm.tbanexo do
+     begin
+       close;
+       sql.clear;
+       sql.Add('delete * from anexo_documentos where AlunoCod = :ddd');
+       parambyname('ddd').AsInteger:= CodExclusao;
+       execsql;
+     end;
+
+     // excluindo documetos
+    with dm.tbdocumentos do
+     begin
+       close;
+       sql.clear;
+       sql.Add('delete * from documentos where AlunoCod = :ddd');
+       parambyname('ddd').AsInteger:= CodExclusao;
+       execsql;
+     end;
+
+     // excluindo endereço
+    with dm.tbendereco do
+     begin
+       close;
+       sql.clear;
+       sql.Add('delete * from endereco where AlunoCod = :ddd');
+       parambyname('ddd').AsInteger:= CodExclusao;
+       execsql;
+     end;
+
+     // excluindo info. complementar
+    with dm.tbinfocomp do
+     begin
+       close;
+       sql.clear;
+       sql.Add('delete * from info_complementar where AlunoCod = :ddd');
+       parambyname('ddd').AsInteger:= CodExclusao;
+       execsql;
+     end;
+
+     // excluindo responsaveis
+    with dm.tbresponsaveis do
+     begin
+       close;
+       sql.clear;
+       sql.Add('delete * from responsaveis where AlunoCod = :ddd');
+       parambyname('ddd').AsInteger:= CodExclusao;
+       execsql;
+     end;
+
+     // excluindo saude
+    with dm.tbsaude do
+     begin
+       close;
+       sql.clear;
+       sql.Add('delete * from saude where AlunoCod = :ddd');
+       parambyname('ddd').AsInteger:= CodExclusao;
+       execsql;
+     end;
+
+     // excluindo anexos de documetos
+      with dm.tbalunos do
+       begin
+         close;
+         sql.clear;
+         sql.Add('delete * from alunos where id = :ddd');
+         parambyname('ddd').AsInteger:= CodExclusao;
+         execsql;
+       end;
+
+
+     showmessage('Aluno excluído com sucesso!');
+
+            frm_inicio := Tfrm_inicio.Create(self);
+            frm_inicio.Parent:= frm_prncipal.panel2;
+            frm_inicio.Align:= alClient;
+            frm_inicio.BorderStyle:= bsNone;
+            frm_inicio.WindowState :=wsMaximized;
+            frm_inicio.show;
+            dm.tbcursos.close();
+  end;
+end;
+
+procedure Tfrm_exaluno.FormCreate(Sender: TObject);
+begin
+edit1.Text:= dm.qconsultanome.Text;
+edit2.Text:= dm.qconsultacpf.Text;
+edit3.Text:= dm.qconsultasexo.Text;
+edit40.Text:= dm.qconsultarg.Text;
+maskedit1.Text:=datetostr( dm.qconsultadata_nasc.value);
+end;
+
+end.

@@ -1,0 +1,199 @@
+object frm_exaluno: Tfrm_exaluno
+  Left = 0
+  Top = 0
+  Caption = 'EXCLUS'#195'O DE ALUNO'
+  ClientHeight = 661
+  ClientWidth = 884
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 884
+    Height = 661
+    Align = alClient
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    object Label17: TLabel
+      Left = 115
+      Top = 155
+      Width = 164
+      Height = 19
+      Caption = 'Informa'#231#245'es do Aluno:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Panel33: TPanel
+      Left = -3
+      Top = 46
+      Width = 798
+      Height = 0
+      BevelOuter = bvNone
+      Color = clGray
+      ParentBackground = False
+      TabOrder = 0
+    end
+    object Panel35: TPanel
+      Left = 115
+      Top = 54
+      Width = 653
+      Height = 72
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      TabOrder = 1
+      object Panel36: TPanel
+        Left = 302
+        Top = 31
+        Width = 130
+        Height = 30
+        BevelOuter = bvNone
+        Color = 16744448
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 0
+        object SpeedButton1: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 130
+          Height = 30
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = 'CONFIRMAR'
+          Flat = True
+          OnClick = iaClick
+          ExplicitTop = 6
+        end
+      end
+      object Panel37: TPanel
+        Left = 256
+        Top = 31
+        Width = 31
+        Height = 30
+        BevelOuter = bvNone
+        Color = 16744448
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 1
+        object SpeedButton4: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 31
+          Height = 30
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = '...'
+          Flat = True
+          OnClick = SpeedButton2Click
+          ExplicitTop = -8
+        end
+      end
+      object Panel39: TPanel
+        Left = 13
+        Top = 12
+        Width = 219
+        Height = 49
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 2
+        object Label1: TLabel
+          Left = 0
+          Top = 0
+          Width = 219
+          Height = 17
+          Align = alTop
+          Caption = 'Selecione o ID do aluno:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          ExplicitWidth = 142
+        end
+        object Panel40: TPanel
+          Left = 0
+          Top = 48
+          Width = 219
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clSilver
+          ParentBackground = False
+          TabOrder = 0
+        end
+        object Edit1: TEdit
+          Left = 0
+          Top = 27
+          Width = 217
+          Height = 21
+          BorderStyle = bsNone
+          TabOrder = 1
+        end
+      end
+    end
+    object Panel1: TPanel
+      Left = 115
+      Top = 185
+      Width = 650
+      Height = 1
+      BevelOuter = bvNone
+      Caption = 'Informa'#231#245'es do Aluno:'
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 2
+    end
+    object Panel3: TPanel
+      Left = 668
+      Top = 567
+      Width = 97
+      Height = 30
+      BevelOuter = bvNone
+      Color = 16744448
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object ia: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 97
+        Height = 30
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'DELETAR'
+        Flat = True
+        OnClick = iaClick
+        ExplicitLeft = 7
+        ExplicitWidth = 130
+        ExplicitHeight = 25
+      end
+    end
+  end
+end

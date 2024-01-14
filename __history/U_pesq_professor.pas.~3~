@@ -1,0 +1,52 @@
+unit U_pesq_professor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pesquisa_professor = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    lb_total: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    DBGrid1: TDBGrid;
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesquisa_professor: Tfrm_pesquisa_professor;
+  AltDelProfessor:integer;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm;
+
+procedure Tfrm_pesquisa_professor.SpeedButton1Click(Sender: TObject);
+begin
+  begin
+    with dm.qprofessor do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from professores where nome like ''%'+txt_buscar.Text+'%''');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qprofessor.RecordCount);
+  end;
+ end;
+end;
+
+end.

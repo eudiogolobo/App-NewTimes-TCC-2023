@@ -1,0 +1,184 @@
+unit U_pesq_avaliacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.DBCGrids;
+
+type
+  Tfrm_pesq_avaliacao = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Label2: TLabel;
+    lb_total: TLabel;
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure Panel1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesq_avaliacao: Tfrm_pesq_avaliacao;
+
+implementation
+
+{$R *.dfm}
+uses
+U_lancamento_notas,U_visao_geral_notas,u_dm, u_principalpas,U_alt_avaliacao,U_del_avaliacao;
+
+procedure Tfrm_pesq_avaliacao.DBGrid1CellClick(Column: TColumn);
+begin
+
+ if CadAltDelAvaliacao=2 then
+  begin
+
+  frm_alt_avaliacao := Tfrm_alt_avaliacao.Create(Self);
+
+  frm_alt_avaliacao.Parent:= frm_prncipal.panel2;
+  frm_alt_avaliacao.Align:= alClient;
+  frm_alt_avaliacao.BorderStyle:= bsNone;
+  frm_alt_avaliacao.WindowState :=wsMaximized;
+  frm_alt_avaliacao.Position :=poMainFormCenter;
+  frm_alt_avaliacao.Show;
+
+  end;
+
+  if CadAltDelAvaliacao=3 then
+  begin
+
+  frm_del_avaliacao := Tfrm_del_avaliacao.Create(Self);
+
+  frm_del_avaliacao.Parent:= frm_prncipal.panel2;
+  frm_del_avaliacao.Align:= alClient;
+  frm_del_avaliacao.BorderStyle:= bsNone;
+  frm_del_avaliacao.WindowState :=wsMaximized;
+  frm_del_avaliacao.Position :=poMainFormCenter;
+  frm_del_avaliacao.Show;
+  end;
+
+   if CadAltDelAvaliacao=4 then
+  begin
+
+  frm_lacamento_notas := Tfrm_lacamento_notas.Create(Self);
+
+  frm_lacamento_notas.Parent:= frm_prncipal.panel2;
+  frm_lacamento_notas.Align:= alClient;
+  frm_lacamento_notas.BorderStyle:= bsNone;
+  frm_lacamento_notas.WindowState :=wsMaximized;
+  frm_lacamento_notas.Position :=poMainFormCenter;
+  frm_lacamento_notas.Show;
+  end;
+
+  if CadAltDelAvaliacao=5 then
+  begin
+
+  frm_visao_geral_notas := Tfrm_visao_geral_notas.Create(Self);
+
+  frm_visao_geral_notas.Parent:= frm_prncipal.panel2;
+  frm_visao_geral_notas.Align:= alClient;
+  frm_visao_geral_notas.BorderStyle:= bsNone;
+  frm_visao_geral_notas.WindowState :=wsMaximized;
+  frm_visao_geral_notas.Position :=poMainFormCenter;
+  frm_visao_geral_notas.Show;
+  end;
+
+
+
+end;
+
+procedure Tfrm_pesq_avaliacao.DBGrid1MouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+frm_prncipal.pnl_sub_menu_notas.Visible:=false;
+frm_prncipal.resultado.visible:= false;
+frm_prncipal.origem.visible:= true;
+end;
+
+procedure Tfrm_pesq_avaliacao.FormCreate(Sender: TObject);
+begin
+with dm.qavaliacao do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select a.id, a.Nome, b.id_turmas,b.Turma, c.id,c.ProfessorCod,c.TurmaCod, c.Tipo, c.ModuloRef, c.TotalAulas,c.Descricao, c.data, c.hora');
+    sql.Add('from professores as a, turmas as b, avaliacao as c');
+    sql.Add('where c.ProfessorCod = a.id and c.TurmaCod = b.id_turmas and b.id_turmas = :idtur and a.id = :idpro');
+    parambyname('idtur').AsInteger:= dm.qpesq_turma_profid_turmas.Value;
+    parambyname('idpro').AsInteger:= LOGADOPRO;
+
+    open;
+    lb_total.Caption:=inttostr(dm.qavaliacao.RecordCount);
+  end;
+end;
+
+procedure Tfrm_pesq_avaliacao.FormMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_pesq_avaliacao.Panel1MouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+frm_prncipal.pnl_sub_menu_notas.Visible:=false;
+frm_prncipal.resultado.visible:= false;
+frm_prncipal.origem.visible:= true;
+end;
+
+procedure Tfrm_pesq_avaliacao.SpeedButton1Click(Sender: TObject);
+begin
+with dm.qavaliacao do
+    begin
+    close;
+    sql.clear;
+     sql.Add('select a.id, a.Nome, b.id_turmas,b.Turma, c.id,c.ProfessorCod,c.TurmaCod, c.Tipo, c.ModuloRef, c.TotalAulas,c.Descricao, c.data, c.hora');
+    sql.Add('from professores as a, turmas as b, avaliacao as c');
+    sql.Add('where c.ProfessorCod = a.id and c.TurmaCod = b.id_turmas and b.id_turmas = :idtur and a.id = :idpro and c.Descricao like ''%'+txt_buscar.text+'%'' ');
+    parambyname('idtur').AsInteger:= dm.qpesq_turma_profid_turmas.Value;
+    parambyname('idpro').AsInteger:= LOGADOPRO;
+    open;
+    lb_total.Caption:=inttostr(dm.qavaliacao.RecordCount);
+  end;
+end;
+
+end.

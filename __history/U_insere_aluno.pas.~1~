@@ -1,0 +1,59 @@
+unit U_insere_aluno;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.Buttons;
+
+type
+  Tfrm_insere_aluno = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel35: TPanel;
+    Panel37: TPanel;
+    SpeedButton4: TSpeedButton;
+    Panel39: TPanel;
+    Label3: TLabel;
+    Panel40: TPanel;
+    Edit1: TEdit;
+    Panel5: TPanel;
+    Label4: TLabel;
+    Panel6: TPanel;
+    DBEdit2: TDBEdit;
+    Panel7: TPanel;
+    Label5: TLabel;
+    Panel8: TPanel;
+    DBEdit3: TDBEdit;
+    Panel9: TPanel;
+    Label6: TLabel;
+    Panel10: TPanel;
+    DBEdit4: TDBEdit;
+    Panel11: TPanel;
+    Label7: TLabel;
+    Panel12: TPanel;
+    DBEdit5: TDBEdit;
+    Panel2: TPanel;
+    Panel30: TPanel;
+    SpeedButton3: TSpeedButton;
+    Panel38: TPanel;
+    SpeedButton5: TSpeedButton;
+    Panel29: TPanel;
+    Label15: TLabel;
+    cb1: TDBComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_insere_aluno: Tfrm_insere_aluno;
+
+implementation
+
+{$R *.dfm}
+
+end.

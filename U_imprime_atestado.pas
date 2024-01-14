@@ -1,0 +1,46 @@
+unit U_imprime_atestado;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, U_imcaluno;
+
+type
+  Tfrm_imprecao_atestadof = class(TForm)
+    imat: TRLReport;
+    RLBand1: TRLBand;
+    RLLabel2: TRLLabel;
+    RLImage1: TRLImage;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLSystemInfo2: TRLSystemInfo;
+    RLLabel1: TRLLabel;
+    RLBand2: TRLBand;
+    Label1: TLabel;
+    Label2: TLabel;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    RLLabel3: TRLLabel;
+    RLLabel6: TRLLabel;
+    RLLabel7: TRLLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_imprecao_atestadof: Tfrm_imprecao_atestadof;
+  ano:string;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm;
+
+end.

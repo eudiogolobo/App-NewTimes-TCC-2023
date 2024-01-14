@@ -1,0 +1,75 @@
+unit U_altturma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.DBCtrls, Vcl.Mask, u_dm, Vcl.ComCtrls;
+
+type
+  Tfrm_altturma = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    ComboBox2: TComboBox;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel8: TPanel;
+    dtp2: TDateTimePicker;
+    Panel11: TPanel;
+    Label6: TLabel;
+    cb1: TComboBox;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    dtp1: TDateTimePicker;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    ComboBox1: TComboBox;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_altturma: Tfrm_altturma;
+
+
+implementation
+
+{$R *.dfm}
+uses
+u_altpesturma;
+
+procedure Tfrm_altturma.FormCreate(Sender: TObject);
+
+begin
+    dm.tbcursos.open;
+ begin
+    dm.tbcursos.First;
+    while not dm.tbcursos.Eof do
+     begin
+     cb1.Items.Add(dm.tbcursosnome.value);
+     dm.tbcursos.Next;
+     end;
+ end;
+
+end;
+
+end.

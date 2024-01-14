@@ -1,0 +1,42 @@
+object frm_impressao_contrato_matricula: Tfrm_impressao_contrato_matricula
+  Left = 0
+  Top = 0
+  Caption = 'frm_impressao_notas_parciais'
+  ClientHeight = 648
+  ClientWidth = 1112
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object contrato: TRLReport
+    Left = 40
+    Top = -568
+    Width = 794
+    Height = 1123
+    DataSource = dm.dsuser
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    object RLBand1: TRLBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 1044
+      object RLRichText1: TRLRichText
+        Left = 6
+        Top = 801
+        Width = 712
+        Height = 13
+        Alignment = taJustify
+        Behavior = [beSiteExpander]
+      end
+    end
+  end
+end

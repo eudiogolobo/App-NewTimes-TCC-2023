@@ -1,0 +1,77 @@
+unit U_lancamento_notas_quadro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.Buttons;
+
+type
+  Tfrm_lacamento_notas_quadro = class(TForm)
+    Panel1: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    DBEdit1: TDBEdit;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    procedure btn_salvarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_lacamento_notas_quadro: Tfrm_lacamento_notas_quadro;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm, U_lancamento_notas;
+
+procedure Tfrm_lacamento_notas_quadro.btn_salvarClick(Sender: TObject);
+begin
+
+ if dbedit1.Text<>'' then
+         begin
+         if MessageDlg('Você deseja salvar as alteração de dados?',mtConfirmation,[mbyes, mbno],0)=mryes then
+            begin
+            dm.tbavaliacao.Edit;
+            dm.tbavaliacao.post;
+            showmessage('Dados Alterados com Sucesso!');
+
+            dm.FDTransaction1.StartTransaction;
+            dm.FDTransaction1.CommitRetaining;
+            frm_lacamento_notas_quadro.close;
+            end
+
+
+         end
+
+     else
+     showmessage('Digite uma nota válida.');
+
+end;
+
+procedure Tfrm_lacamento_notas_quadro.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+with dm.qavaliacao do
+           begin
+           close;
+            sql.clear;
+            sql.Add('select * from avaliacao where nome_avaliacao = :avaliacao  and turma = :turma');
+            parambyname('turma').asstring:=frm_lacamento_notas.cb1.Text;
+            parambyname('avaliacao').asstring:=frm_lacamento_notas.cb2.Text;
+            open;
+            frm_lacamento_notas.lb_total.Caption:=inttostr(dm.qavaliacao.RecordCount);
+           end;
+            if dm.qavaliacao.RecordCount=0 then
+            showmessage('Nenhum resultado foi encontrado');
+end;
+
+end.

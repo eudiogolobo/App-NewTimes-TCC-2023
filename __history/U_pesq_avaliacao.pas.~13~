@@ -1,0 +1,113 @@
+unit U_pesq_avaliacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  Tfrm_pesq_avaliacao = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    lb_total: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesq_avaliacao: Tfrm_pesq_avaliacao;
+
+implementation
+
+{$R *.dfm}
+uses
+U_lancamento_notas,u_dm, u_principalpas,U_alt_avaliacao,U_del_avaliacao;
+
+procedure Tfrm_pesq_avaliacao.DBGrid1CellClick(Column: TColumn);
+begin
+if AltDelAvaliacao=1 then
+  begin
+
+  frm_alt_avaliacao := Tfrm_alt_avaliacao.Create(Self);
+
+  frm_alt_avaliacao.Parent:= frm_prncipal.panel2;
+  frm_alt_avaliacao.Align:= alClient;
+  frm_alt_avaliacao.BorderStyle:= bsNone;
+  frm_alt_avaliacao.WindowState :=wsMaximized;
+  frm_alt_avaliacao.Position :=poMainFormCenter;
+  frm_alt_avaliacao.Show;
+  end;
+
+  if AltDelAvaliacao=2 then
+  begin
+
+  frm_del_avaliacao := Tfrm_del_avaliacao.Create(Self);
+
+  frm_del_avaliacao.Parent:= frm_prncipal.panel2;
+  frm_del_avaliacao.Align:= alClient;
+  frm_del_avaliacao.BorderStyle:= bsNone;
+  frm_del_avaliacao.WindowState :=wsMaximized;
+  frm_del_avaliacao.Position :=poMainFormCenter;
+  frm_del_avaliacao.Show;
+  end;
+
+   if AltDelAvaliacao=3 then
+  begin
+
+  frm_lacamento_notas := Tfrm_lacamento_notas.Create(Self);
+
+  frm_lacamento_notas.Parent:= frm_prncipal.panel2;
+  frm_lacamento_notas.Align:= alClient;
+  frm_lacamento_notas.BorderStyle:= bsNone;
+  frm_lacamento_notas.WindowState :=wsMaximized;
+  frm_lacamento_notas.Position :=poMainFormCenter;
+  frm_lacamento_notas.Show;
+  end
+
+
+end;
+
+procedure Tfrm_pesq_avaliacao.FormCreate(Sender: TObject);
+begin
+with dm.qavaliacao do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select a.id, a.Nome, b.id_turmas,b.Turma, c.id,c.ProfessorCod,c.TurmaCod, c.Tipo, c.ModuloRef, c.TotalAulas,c.Descricao, c.data, c.hora');
+    sql.Add('from professores as a, turmas as b, avaliacao as c');
+    sql.Add('where c.ProfessorCod = a.id and c.TurmaCod = b.id_turmas and a.id = :idpro');
+    parambyname('idpro').AsInteger:= LOGADOPRO;
+
+    open;
+    lb_total.Caption:=inttostr(dm.qavaliacao.RecordCount);
+  end;
+end;
+
+procedure Tfrm_pesq_avaliacao.SpeedButton1Click(Sender: TObject);
+begin
+with dm.qavaliacao do
+    begin
+    close;
+    sql.clear;
+     sql.Add('select a.id, a.Nome, b.id_turmas,b.Turma, c.id,c.ProfessorCod,c.TurmaCod, c.Tipo, c.ModuloRef, c.TotalAulas,c.Descricao, c.data, c.hora');
+    sql.Add('from professores as a, turmas as b, avaliacao as c');
+    sql.Add('where c.ProfessorCod = a.id and c.TurmaCod = b.id_turmas and a.id = :idpro and c.Descricao like ''%'+txt_buscar.text+'%'' ');
+    parambyname('idpro').AsInteger:= LOGADOPRO;
+    open;
+    lb_total.Caption:=inttostr(dm.qavaliacao.RecordCount);
+  end;
+end;
+
+end.

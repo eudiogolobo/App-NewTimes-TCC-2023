@@ -1,0 +1,147 @@
+unit U_altturma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.DBCtrls, Vcl.Mask, u_dm, Vcl.ComCtrls;
+
+type
+  Tfrm_altturma = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    ComboBox2: TComboBox;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel8: TPanel;
+    dtp2: TDateTimePicker;
+    Panel11: TPanel;
+    Label6: TLabel;
+    cb1: TComboBox;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    dtp1: TDateTimePicker;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    ComboBox1: TComboBox;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_altturma: Tfrm_altturma;
+
+
+implementation
+
+{$R *.dfm}
+uses
+u_altpesturma;
+
+procedure Tfrm_altturma.FormCreate(Sender: TObject);
+
+begin
+    dm.tbcursos.open;
+ begin
+    dm.tbcursos.First;
+    while not dm.tbcursos.Eof do
+     begin
+     cb2.Items.Add(dm.tbcursosnome.value);
+     dm.tbcursos.Next;
+     end;
+ end;
+
+end;
+
+procedure Tfrm_altturma.SpeedButton1Click(Sender: TObject);
+begin
+if edit1.Text<>'' then
+ begin
+dm.tbturma.Open();
+if dm.tbturma.Locate('id_turmas', edit1.text,[]) then
+ begin
+ if MessageDlg('Você deseja alterar dados dessa turma?',mtConfirmation,[mbyes, mbno],0)=mryes then
+    begin
+      speedbutton1.Enabled:=false;
+      dbedit1.Enabled:=true;
+      dbedit2.Enabled:=true;
+      cb1.Enabled:=true;
+      cb2.Enabled:=true;
+
+      dbedit1.SetFocus;
+  end;
+ end;
+ end
+ else
+ showmessage('Nenhum ID escrito!');
+end;
+
+procedure Tfrm_altturma.SpeedButton2Click(Sender: TObject);
+begin
+dm.tbturma.close;
+ dm.tbturma.open;
+ dm.tbturma.Locate('id_turmas', edit1.text,[]);
+
+ dbedit1.Enabled:=false;
+ dbedit2.Enabled:=false;
+ cb1.Enabled:=false;
+ cb2.Enabled:=false;
+
+ speedbutton1.Enabled:=true;
+end;
+
+procedure Tfrm_altturma.SpeedButton3Click(Sender: TObject);
+begin
+      if dm.tbturma.Locate('id_turmas', edit1.text,[]) then
+      begin
+        if dbedit1.Enabled=true  then
+         begin
+         if MessageDlg('Você confirma a alteração de dados dessa turma?',mtConfirmation,[mbyes, mbno],0)=mryes then
+            begin
+            dm.tbturma.Edit;
+            dm.tbturma.post;
+            showmessage('Dados Alterados com Sucesso!');
+
+            dbedit1.Enabled:=false;
+            dbedit2.Enabled:=false;
+            cb1.Enabled:=false;
+            cb2.Enabled:=false;
+
+            speedbutton1.Enabled:=true;
+
+            dm.FDTransaction1.StartTransaction;
+            dm.FDTransaction1.CommitRetaining;
+          end;
+
+          end
+         else
+         showmessage('Começe antes de salvar.');
+      end
+      else
+      showmessage('Nenhum aluno selecionado!');
+
+end;
+
+end.

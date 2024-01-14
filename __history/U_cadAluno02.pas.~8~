@@ -1,0 +1,86 @@
+unit U_cadAluno02;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno02 = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel33: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Label4: TLabel;
+    Panel11: TPanel;
+    Label5: TLabel;
+    Panel13: TPanel;
+    Label6: TLabel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Label7: TLabel;
+    Panel16: TPanel;
+    Panel19: TPanel;
+    Label9: TLabel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Label10: TLabel;
+    Panel22: TPanel;
+    Panel23: TPanel;
+    Label11: TLabel;
+    Panel24: TPanel;
+    Panel28: TPanel;
+    Label14: TLabel;
+    DBComboBox3: TDBComboBox;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Label18: TLabel;
+    Panel30: TPanel;
+    Panel27: TPanel;
+    Label13: TLabel;
+    Panel31: TPanel;
+    Panel17: TPanel;
+    Label8: TLabel;
+    Panel18: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    Edit1: TEdit;
+    ComboBox2: TComboBox;
+    ComboBox1: TComboBox;
+    procedure btn_salvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno02: Tfrm_cadAluno02;
+
+implementation
+
+{$R *.dfm}
+uses
+U_cadAluno03, U_principalpas;
+
+procedure Tfrm_cadAluno02.btn_salvarClick(Sender: TObject);
+begin
+ frm_cadAluno03 := Tfrm_cadAluno03.Create(self);
+ frm_cadAluno03.Parent:= frm_prncipal.panel2;
+ frm_cadAluno03.Align:= alClient;
+ frm_cadAluno03.BorderStyle:= bsNone;
+ frm_cadAluno03.WindowState :=wsMaximized;
+ frm_cadAluno03.show;
+
+end;
+
+end.

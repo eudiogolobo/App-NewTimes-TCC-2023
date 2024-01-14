@@ -1,0 +1,63 @@
+unit U_pqdeluser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pqdeluser = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label15: TLabel;
+    Image1: TImage;
+    Label2: TLabel;
+    lb_total: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel34: TPanel;
+    DBGrid1: TDBGrid;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pqdeluser: Tfrm_pqdeluser;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm,u_caduser;
+
+procedure Tfrm_pqdeluser.DBGrid1CellClick(Column: TColumn);
+begin
+frm_caduser.Edit1:=
+
+
+frm_pqdeluser.Close;
+end;
+
+procedure Tfrm_pqdeluser.SpeedButton1Click(Sender: TObject);
+begin
+ begin
+    with dm.qprofessor do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from professores where nome like ''%'+txt_buscar.Text+'%''');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qalunos.RecordCount);
+  end;
+ end;
+end;
+
+end.

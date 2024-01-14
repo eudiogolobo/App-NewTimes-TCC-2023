@@ -1,0 +1,83 @@
+unit U_cadAluno03;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno03 = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel33: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel8: TPanel;
+    DBEdit1: TDBEdit;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Label2: TLabel;
+    Panel4: TPanel;
+    DBEdit2: TDBEdit;
+    Panel5: TPanel;
+    Label4: TLabel;
+    Panel6: TPanel;
+    DBEdit3: TDBEdit;
+    Panel9: TPanel;
+    Label5: TLabel;
+    Panel10: TPanel;
+    DBEdit4: TDBEdit;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    DBEdit5: TDBEdit;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    DBEdit6: TDBEdit;
+    Panel15: TPanel;
+    Label8: TLabel;
+    Panel16: TPanel;
+    DBEdit7: TDBEdit;
+    Panel17: TPanel;
+    Label9: TLabel;
+    Panel18: TPanel;
+    DBEdit8: TDBEdit;
+    Panel19: TPanel;
+    Label10: TLabel;
+    Panel20: TPanel;
+    DBEdit9: TDBEdit;
+    Panel21: TPanel;
+    Label11: TLabel;
+    Panel22: TPanel;
+    DBEdit10: TDBEdit;
+    Panel23: TPanel;
+    Label12: TLabel;
+    Panel24: TPanel;
+    DBEdit11: TDBEdit;
+    Panel25: TPanel;
+    Label13: TLabel;
+    Panel26: TPanel;
+    DBEdit12: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno03: Tfrm_cadAluno03;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,28 @@
+unit U_impressao_certificado;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls;
+
+type
+  Tfrm_impressao_certificado = class(TForm)
+    RLReport1: TRLReport;
+    Image1: TImage;
+    RLLabel1: TRLLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_impressao_certificado: Tfrm_impressao_certificado;
+
+implementation
+
+{$R *.dfm}
+
+end.

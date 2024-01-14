@@ -1,0 +1,96 @@
+unit U_pesq_turma_prof;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pesq_turma_professor = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label2: TLabel;
+    lb_total: TLabel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesq_turma_professor: Tfrm_pesq_turma_professor;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm, u_principalpas,U_cad_avaliacao,u_pesq_avaliacao;
+
+procedure Tfrm_pesq_turma_professor.DBGrid1CellClick(Column: TColumn);
+begin
+
+  if CadAltDelAvaliacao=1 then
+  begin
+  frm_cad_avaliacao := Tfrm_cad_avaliacao.Create(self);
+  frm_cad_avaliacao.Parent:= frm_prncipal.panel2;
+  frm_cad_avaliacao.Align:= alClient;
+  frm_cad_avaliacao.BorderStyle:= bsNone;
+  frm_cad_avaliacao.WindowState :=wsMaximized;
+  frm_cad_avaliacao.show;
+  end
+  else
+   begin
+
+  frm_pesq_avaliacao := Tfrm_pesq_avaliacao.Create(Self);
+  frm_pesq_avaliacao.Parent:= frm_prncipal.panel2;
+  frm_pesq_avaliacao.Align:= alClient;
+  frm_pesq_avaliacao.BorderStyle:= bsNone;
+  frm_pesq_avaliacao.WindowState :=wsMaximized;
+  frm_pesq_avaliacao.Position :=poMainFormCenter;
+  frm_pesq_avaliacao.Show;
+  end;
+
+
+
+end;
+
+procedure Tfrm_pesq_turma_professor.FormCreate(Sender: TObject);
+begin
+with dm.qpesq_turma_prof do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select a.TurmaCod, a.ProfessorCod, b.id_turmas,b.Turma, b.CursoCod,b.Turno,b.status,b.DataInicio,b.DataFinal, c.id, d.CursosId, d.Nome');
+    sql.Add('from turma_professor as a, turmas as b, professores as c, Cursos as d');
+    sql.Add('where a.TurmaCod = b.id_turmas and a.ProfessorCod = c.id and d.CursosId = b.CursoCod and c.id = :idpro ');
+    parambyname('idpro').asinteger:= LOGADOPRO;
+    open;
+    lb_total.Caption:=inttostr(dm.qpesq_turma_prof.RecordCount);
+  end;
+end;
+
+procedure Tfrm_pesq_turma_professor.SpeedButton1Click(Sender: TObject);
+begin
+with dm.qpesq_turma_prof do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select a.TurmaCod, a.ProfessorCod, b.id_turmas,b.Turma, b.CursoCod,b.Turno,b.status,b.DataInicio,b.DataFinal, c.id, d.CursosId, d.Nome');
+    sql.Add('from turma_professor as a, turmas as b, professores as c, Cursos as d');
+    sql.Add('where a.TurmaCod = b.id_turmas and a.ProfessorCod = c.id and d.CursosId = b.CursoCod and c.id = :idpro and b.turma like ''%'+txt_buscar.text+'%'' ');
+    parambyname('idpro').asinteger:= LOGADOPRO;
+    open;
+    lb_total.Caption:=inttostr(dm.qpesq_turma_prof.RecordCount);
+  end;
+end;
+
+end.

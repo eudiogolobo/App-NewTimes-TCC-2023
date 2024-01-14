@@ -1,0 +1,117 @@
+unit U_turma_relacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  Tfrm_turma_relacao = class(TForm)
+    Panel2: TPanel;
+    Panel5: TPanel;
+    Label2: TLabel;
+    Panel6: TPanel;
+    DBEdit2: TDBEdit;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel3: TPanel;
+    DBEdit1: TDBEdit;
+    Panel29: TPanel;
+    Label15: TLabel;
+    cb2: TDBComboBox;
+    Panel4: TPanel;
+    Label4: TLabel;
+    cb1: TDBComboBox;
+    Panel8: TPanel;
+    Label5: TLabel;
+    cb3: TDBComboBox;
+    Label1: TLabel;
+    Panel35: TPanel;
+    Panel36: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel37: TPanel;
+    SpeedButton4: TSpeedButton;
+    Panel39: TPanel;
+    Label6: TLabel;
+    Panel40: TPanel;
+    Edit1: TEdit;
+    Panel1: TPanel;
+    Panel30: TPanel;
+    SpeedButton3: TSpeedButton;
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_turma_relacao: Tfrm_turma_relacao;
+
+implementation
+
+{$R *.dfm}
+uses
+u_im_turma, u_dm,U_pes_turma_relacao;
+
+procedure Tfrm_turma_relacao.SpeedButton1Click(Sender: TObject);
+begin
+if edit1.Text<>'' then
+ begin
+dm.tbturma.Open();
+if dm.tbturma.Locate('id_turmas', edit1.text,[]) then
+  begin
+   if MessageDlg('Confirmar a turma selecionada?',mtConfirmation,[mbyes, mbno],0)=mryes then
+      begin
+      speedbutton1.Enabled:=false;
+    end;
+  end;
+ end
+ else
+ showmessage('Nenhuma turma selecionada!');
+end;
+
+procedure Tfrm_turma_relacao.SpeedButton3Click(Sender: TObject);
+begin
+ if (dbedit1.Text<>'') and (dm.tbturma.Locate('id_turmas', edit1.text,[])) then
+  begin
+    speedbutton1.Enabled:=true;
+
+    with dm.qpi do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select * from alunos where turma='+dbedit1.text+'');
+      open;
+    end;
+
+    with dm.qturmas do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select * from turmas where turma='+dbedit1.text+'');
+      open;
+    end;
+
+    frm_turma_documento.tr.Preview() ;
+
+
+  end
+  else
+  showmessage('Nenhuma turma selecionada!')
+
+
+
+end;
+
+procedure Tfrm_turma_relacao.SpeedButton4Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_pesqimpturma,  frm_pesqimpturma);
+ frm_pesqimpturma.ShowModal;
+end;
+
+end.

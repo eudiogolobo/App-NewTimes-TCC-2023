@@ -1,0 +1,82 @@
+unit U_alteracao_senha;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls;
+
+type
+  Tfrm_alteracao_senha = class(TForm)
+    Panel2: TPanel;
+    Label2: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    Edit2: TEdit;
+    Panel21: TPanel;
+    Edit3: TEdit;
+    Panel3: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_alteracao_senha: Tfrm_alteracao_senha;
+
+implementation
+
+{$R *.dfm}
+USES
+u_inicio,u_principalpas,u_dm;
+
+procedure Tfrm_alteracao_senha.btn_cancelarClick(Sender: TObject);
+begin
+if MessageDlg('Você perderá tudo já feito, deseja mesmo continuar?',mtConfirmation,[mbyes, mbno],0)=mryes then
+  begin
+  //////////////////////////////////////////
+
+
+    frm_inicio := Tfrm_inicio.Create(self);
+    frm_inicio.Parent:= frm_prncipal.panel2;
+    frm_inicio.Align:= alClient;
+    frm_inicio.BorderStyle:= bsNone;
+    frm_inicio.WindowState :=wsMaximized;
+    frm_inicio.show;
+  end;
+end;
+
+procedure Tfrm_alteracao_senha.btn_salvarClick(Sender: TObject);
+begin
+if edit1.Text<>edit2.Text then
+showmessage('As senhas digitadas não coincidem!')
+else
+  begin
+    with dm.tbuser do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('update from usuarios set senha = :senha where id= :iduser');
+      parambyname('senha').asstring:=edit1.Text;
+      parambyname('iduser').AsInteger:=LOGADO;
+      execsql;
+    end;
+  end;
+end;
+
+end.

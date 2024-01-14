@@ -1,0 +1,71 @@
+unit U_cadAluno03;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno03 = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel33: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel8: TPanel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Label2: TLabel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    Panel6: TPanel;
+    Panel9: TPanel;
+    Label5: TLabel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Label8: TLabel;
+    Panel16: TPanel;
+    Panel17: TPanel;
+    Label9: TLabel;
+    Panel18: TPanel;
+    Panel19: TPanel;
+    Label10: TLabel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Label11: TLabel;
+    Panel22: TPanel;
+    Panel23: TPanel;
+    Label12: TLabel;
+    Panel24: TPanel;
+    Panel25: TPanel;
+    Label13: TLabel;
+    Panel26: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno03: Tfrm_cadAluno03;
+
+implementation
+
+{$R *.dfm}
+
+end.

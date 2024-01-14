@@ -1,0 +1,94 @@
+unit U_exaluno;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask;
+
+type
+  Tfrm_exaluno = class(TForm)
+    Panel2: TPanel;
+    Panel33: TPanel;
+    Panel35: TPanel;
+    Panel36: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel37: TPanel;
+    SpeedButton4: TSpeedButton;
+    Panel39: TPanel;
+    Label1: TLabel;
+    Panel40: TPanel;
+    Edit1: TEdit;
+    Label17: TLabel;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    ia: TSpeedButton;
+    procedure iaClick(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_exaluno: Tfrm_exaluno;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm, U_pqexaluno;
+
+procedure Tfrm_exaluno.iaClick(Sender: TObject);
+begin
+if edit1.Text<>'' then
+ begin
+  dm.tbalunos.Open();
+  if dm.tbalunos.Locate('id', edit1.text,[]) then
+   begin
+   if MessageDlg('Você confirma o aluno?',mtConfirmation,[mbyes, mbno],0)=mryes then
+      begin
+      dm.tbalunos.Edit;
+
+      end
+    else
+    begin
+    dm.tbalunos.Cancel;
+    dm.tbalunos.close;
+    end;
+
+   end;
+  end
+  else
+   showmessage('Nenhum ID escrito!');
+end;
+
+procedure Tfrm_exaluno.SpeedButton2Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_pqexal,  frm_pqexal);
+ frm_pqexal.ShowModal;
+end;
+
+procedure Tfrm_exaluno.SpeedButton3Click(Sender: TObject);
+begin
+if dm.tbalunos.Locate('id', edit1.text,[]) then
+ begin
+ if MessageDlg('Deseja mesmo deletar este aluno?',mtConfirmation,[mbyes, mbno],0)=mryes then
+    begin
+    dm.tbalunos.delete;
+   showmessage('Deletado com Sucesso!');
+    dm.FDTransaction1.StartTransaction;
+    dm.FDTransaction1.CommitRetaining;
+    end;
+ end
+ else
+ begin
+   dm.tbalunos.Cancel;
+   dm.tbalunos.CLOSE;
+ end;
+end;
+
+end.

@@ -1,0 +1,151 @@
+unit U_altCur;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  Tfrm_altCurso = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    DBEdit1: TDBEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    DBEdit3: TDBEdit;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    Panel4: TPanel;
+    Label5: TLabel;
+    Panel8: TPanel;
+    DBEdit4: TDBEdit;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    DBEdit5: TDBEdit;
+    Panel13: TPanel;
+    Label7: TLabel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Label8: TLabel;
+    Panel16: TPanel;
+    DBEdit7: TDBEdit;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    Panel6: TPanel;
+    DBEdit2: TDBEdit;
+    Panel17: TPanel;
+    Label9: TLabel;
+    Panel18: TPanel;
+    DBEdit8: TDBEdit;
+    Panel19: TPanel;
+    Label10: TLabel;
+    Panel20: TPanel;
+    DBEdit9: TDBEdit;
+    Panel21: TPanel;
+    Label11: TLabel;
+    Panel22: TPanel;
+    DBEdit10: TDBEdit;
+    ScrollBar1: TScrollBar;
+    DBEdit6: TDBEdit;
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_altCurso: Tfrm_altCurso;
+
+
+implementation
+
+{$R *.dfm}
+uses
+U_dm, U_pqCurso,U_principalpas,u_inicio;
+
+
+
+procedure Tfrm_altCurso.btn_cancelarClick(Sender: TObject);
+begin
+ if MessageDlg('Você perderá as alterações já feitas, deseja mesmo cancelar?',mtConfirmation,[mbyes, mbno],0)=mryes then
+  begin
+  //////////////////////////////////////////
+  dm.qcursos.close();
+
+  frm_inicio := Tfrm_inicio.Create(self);
+  frm_inicio.Parent:= frm_prncipal.panel2;
+  frm_inicio.Align:= alClient;
+  frm_inicio.BorderStyle:= bsNone;
+  frm_inicio.WindowState :=wsMaximized;
+  frm_inicio.show;
+  end;
+end;
+
+procedure Tfrm_altCurso.btn_salvarClick(Sender: TObject);
+begin
+        if MessageDlg('Você deseja salvar as alteração de dados desse curso?',mtConfirmation,[mbyes, mbno],0)=mryes then
+            begin
+            dm.qcursos.Edit;
+            dm.qcursos.post;
+
+
+            dm.FDTransaction1.StartTransaction;
+            dm.FDTransaction1.CommitRetaining;
+
+            frm_inicio := Tfrm_inicio.Create(self);
+            frm_inicio.Parent:= frm_prncipal.panel2;
+            frm_inicio.Align:= alClient;
+            frm_inicio.BorderStyle:= bsNone;
+            frm_inicio.WindowState :=wsMaximized;
+            frm_inicio.show;
+            dm.qcursos.close;
+             showmessage('Dados Alterados com Sucesso!');
+            end;
+
+
+end;
+
+procedure Tfrm_altCurso.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_altCurso.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_altCurso.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+end.

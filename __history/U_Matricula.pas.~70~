@@ -1,0 +1,430 @@
+unit U_Matricula;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls,System.DateUtils, Vcl.ComCtrls;
+
+type
+  Tfrm_matricula = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel1: TPanel;
+    DBEdit1: TDBEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    Panel10: TPanel;
+    DBEdit3: TDBEdit;
+    Panel11: TPanel;
+    Label6: TLabel;
+    Panel12: TPanel;
+    DBEdit5: TDBEdit;
+    Panel35: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Label4: TLabel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Label5: TLabel;
+    cb1: TComboBox;
+    Panel6: TPanel;
+    Label7: TLabel;
+    ComboBox2: TComboBox;
+    Panel8: TPanel;
+    Label8: TLabel;
+    Panel13: TPanel;
+    Label9: TLabel;
+    Panel14: TPanel;
+    Label10: TLabel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    DBEdit2: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit6: TDBEdit;
+    Panel15: TPanel;
+    Panel16: TPanel;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    Label11: TLabel;
+    DBEdit7: TDBEdit;
+    Panel19: TPanel;
+    Label12: TLabel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Label13: TLabel;
+    Panel22: TPanel;
+    Label14: TLabel;
+    ScrollBar1: TScrollBar;
+    Label15: TLabel;
+    Panel23: TPanel;
+    Panel24: TPanel;
+    Label16: TLabel;
+    MaskEdit2: TMaskEdit;
+    Panel25: TPanel;
+    Label18: TLabel;
+    ComboBox1: TComboBox;
+    Panel26: TPanel;
+    Label19: TLabel;
+    Panel27: TPanel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Panel28: TPanel;
+    Panel29: TPanel;
+    Label22: TLabel;
+    Panel30: TPanel;
+    Panel31: TPanel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Edit1: TEdit;
+    ComboBox3: TComboBox;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    dtp1: TDateTimePicker;
+    procedure FormCreate(Sender: TObject);
+    procedure cb1Change(Sender: TObject);
+    procedure ComboBox2Change(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure ComboBox3Change(Sender: TObject);
+    procedure Edit3Change(Sender: TObject);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure Panel2MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_matricula: Tfrm_matricula;
+  valortotal:double;
+  mensalidade:double;
+
+implementation
+
+{$R *.dfm}
+uses
+u_dm, U_PQAL,U_impressao_contrato, u_inicio,u_principalpas;
+
+procedure Tfrm_matricula.btn_cancelarClick(Sender: TObject);
+begin
+if MessageDlg('Você perderá tudo oque já fez. Deseja continuar?',mtConfirmation,[mbyes, mbno],0)=mryes then
+  begin
+  //////////////////////////////////////////
+
+  frm_inicio := Tfrm_inicio.Create(self);
+  frm_inicio.Parent:= frm_prncipal.panel2;
+  frm_inicio.Align:= alClient;
+  frm_inicio.BorderStyle:= bsNone;
+  frm_inicio.WindowState :=wsMaximized;
+  frm_inicio.show;
+  end;
+end;
+
+procedure Tfrm_matricula.btn_salvarClick(Sender: TObject);
+VAR
+situacao,data:string;
+h:integer;
+
+begin
+  WITH dm.qmatricula_cad do
+ begin
+   close;
+   sql.clear;
+   sql.add('select * from matricula where AlunoCod= :codaluno and TurmaCod = :codturma');
+   parambyname('codaluno').asinteger:= 	CodMatricula;
+   parambyname('codturma').asinteger:= DM.qturmasid_turmas.Value;
+   open;
+
+   if recordcount=0 then
+   begin
+     if combobox3.ItemIndex=0 then
+     begin
+       situacao:='ATIVA';
+     end;
+      if combobox3.ItemIndex=1 then
+     begin
+       situacao:='INATIVA';
+     end;
+     ///////////////////////
+     WITH dm.tbmatricula do
+     begin
+       close;
+       sql.clear;
+       sql.add('insert into matricula (AlunoCod, TurmaCod, DataMatricula, SituacaoMatricula) values (:AlunoCod, :TurmaCod, :DataMatricula, :SituacaoMatricula)');
+       parambyname('AlunoCod').asinteger:= CodMatricula;
+       parambyname('TurmaCod').asinteger:= DM.qturmasid_turmas.Value;
+       parambyname('DataMatricula').asdate:= strtodate(MASKEDIT2.Text) ;
+       parambyname('SituacaoMatricula').asstring:= situacao;
+       execsql;
+     end;
+     dm.tbmatricula.open;
+     dm.tbmatricula.Last;
+     /////
+
+
+
+
+     for h:=1 to combobox3.itemindex+1 do
+     begin
+
+      with dm.tbmensalidade do
+       begin
+         close;
+         sql.Clear;
+         sql.Add('insert into mensalidade (MatriculaCod,ValorMensalidade,FormaPagamento,n_parcela,DataVencimento,status) values (:MatriculaCod, :ValorMensalidade, :FormaPagamento, :n_parcela, :DataVencimento,:status)');
+         parambyname('MatriculaCod').AsInteger:= dm.tbmatriculaid.value;
+         parambyname('ValorMensalidade').AsFloat:= mensalidade;
+         parambyname('FormaPagamento').asstring:= combobox3.Text;
+         parambyname('DataVencimento').asdate:= dtp1.Date;
+         parambyname('status').asstring:='À VENCER';
+         parambyname('n_parcela').asstring:= inttostr(h);
+
+         execsql;
+
+
+
+       end;
+       dtp1.DateTime := IncMonth(dtp1.DateTime, 1);
+
+
+     end;
+
+     /// inserindo em acoes
+
+      WITH dm.tbControleAcoes do
+     begin
+       close;
+       sql.clear;
+       sql.add('insert into controledeacoes (UsuarioCodCad ,DataCad,HoraCad,CodTabela,id_tabela_ref) values (:UsuarioCodCad ,:DataCad,:HoraCad,:CodTabela,:id_tabela_ref)');
+       parambyname('UsuarioCodCad').asinteger:= logado;
+       parambyname('DataCad').asdate:= date();
+       parambyname('HoraCad').astime:= time() ;
+       parambyname('CodTabela').asinteger:= 1;
+       parambyname('id_tabela_ref').asinteger:= dm.tbmatriculaid.Value;
+       execsql;
+     end;
+
+     showmessage('Cadastro salvo com sucesso');
+         dm.TBMATRICULA.close;
+         dm.qcursos.close;
+         dm.qturmas.Close;
+
+        frm_inicio := Tfrm_inicio.Create(self);
+        frm_inicio.Parent:= frm_prncipal.panel2;
+        frm_inicio.Align:= alClient;
+        frm_inicio.BorderStyle:= bsNone;
+        frm_inicio.WindowState :=wsMaximized;
+        frm_inicio.show;
+       end
+     else
+     begin
+     showmessage('ERRO: Esse aluno já está matriculado nessa turma.');
+     end;
+ end;
+
+
+end;
+
+procedure Tfrm_matricula.cb1Change(Sender: TObject);
+begin
+combobox2.Clear;
+
+
+
+if edit2.Text<>'' then
+begin
+edit2.Clear;
+end;
+
+if edit3.Text<>'' then
+begin
+edit3.Clear;
+end;
+
+if combobox3.ItemIndex<>-1 then
+begin
+  combobox3.clear;
+end;
+
+if edit1.Text<>'' then
+begin
+edit1.Clear;
+end;
+
+
+with dm.qcursos do
+begin
+  close;
+  sql.Clear;
+  sql.Add('select * from cursos where Nome = :nomecurso');
+  parambyname('nomecurso').asstring:=cb1.Text;
+  open;
+end;
+valortotal:=(dm.qcursosValorTotal.value);
+
+edit2.Text:=floattostr(dm.qcursosValorTotal.value);
+
+with dm.qturmas do
+begin
+  close;
+  sql.Clear;
+  sql.Add('select * from turmas where  CursoCod = :CursoCod');
+  parambyname('CursoCod').asinteger:=dm.qcursosCursosId.value;
+  open;
+end;
+
+ dm.qturmas.First;
+ while not dm.qturmas.Eof do
+ begin
+   combobox2.Items.Add(dm.qturmasturma.Value);
+   dm.qturmas.next;
+ end;
+ dm.qturmas.Close;
+
+end;
+
+procedure Tfrm_matricula.ComboBox2Change(Sender: TObject);
+var
+meses,i:integer;
+begin
+with dm.qturmas do
+ begin
+   close;
+   sql.Clear;
+   sql.Add('select * from turmas where Turma = :turminha');
+   parambyname('turminha').AsString:= combobox2.Text;
+   open;
+ end;
+ combobox3.clear;
+
+ meses:=(MonthsBetween(dm.qturmasDataFinal.Value, dm.qturmasDataInicio.Value)+1);
+
+ for i:= 1 to meses do
+ begin
+   combobox3.Items.Add(inttostr(i)+'x');
+ end;
+
+
+
+
+
+end;
+
+procedure Tfrm_matricula.ComboBox3Change(Sender: TObject);
+var
+posicao:integer;
+begin
+ posicao:=combobox3.ItemIndex+1;
+ mensalidade:=(strtofloat(edit2.Text)/posicao);
+ edit1.Text:=(formatfloat('#,,0.00', mensalidade));
+end;
+
+procedure Tfrm_matricula.Edit3Change(Sender: TObject);
+var
+posicao:integer;
+begin
+if (edit3.Text='') or (edit3.Text='0') then
+  begin
+  edit2.Text:=floattostr(valortotal);
+  posicao:=combobox3.ItemIndex+1;
+   mensalidade:=(valortotal/posicao);
+   edit1.Text:=(formatfloat('#,,0.00', mensalidade));
+  end
+  else
+  begin
+
+   edit2.Text:= floattostr(valortotal-strtofloat(edit3.Text));
+
+   posicao:=combobox3.ItemIndex+1;
+   mensalidade:=(strtofloat(edit2.Text)/posicao);
+   edit1.Text:=(formatfloat('#,,0.00', mensalidade));
+  end;
+
+end;
+
+procedure Tfrm_matricula.FormCreate(Sender: TObject);
+begin
+maskedit2.Text:= datetostr(date());
+
+dm.tbmatricula.close();
+dm.tbmatricula.open();
+dm.tbmatricula.Append;
+
+dm.qturmas.Close;
+dm.tbcursos.Open();
+ dm.tbcursos.First;
+ while not dm.tbcursos.Eof do
+ begin
+ cb1.Items.Add(dm.tbcursosnome.Value);
+ dm.tbcursos.Next;
+ end;
+
+ dm.tbcursos.Close;
+end;
+
+procedure Tfrm_matricula.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_matricula.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.Max-scrollbar1.PageSize) then
+begin
+scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_matricula.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+
+scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_matricula.Panel2MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ frm_prncipal.pnl_matricula.visible:=false;
+ frm_prncipal.pnl_perfil.visible:=false;
+frm_prncipal.pnl_sub_menu_alunos.visible:=false;
+frm_prncipal.pnl_sub_menu_avaliacoes.visible:=false;
+frm_prncipal.pnl_sub_menu_cursos.visible:=false;
+frm_prncipal.pnl_sub_menu_professor.visible:=false;
+frm_prncipal.pnl_sub_menu_relatorios.visible:=false;
+frm_prncipal.pnl_sub_menu_turmas.visible:=false;
+frm_prncipal.pnl_sub_usuarios.visible:=false;
+end;
+
+procedure Tfrm_matricula.ScrollBar1Change(Sender: TObject);
+begin
+Panel2.Top:= -scrollbar1.position;
+end;
+
+end.

@@ -1,0 +1,51 @@
+unit U_im;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls;
+
+type
+  Tfrm_imprime = class(TForm)
+    im: TRLReport;
+    RLBand1: TRLBand;
+    RLBand2: TRLBand;
+    RLLabel1: TRLLabel;
+    RLLabel2: TRLLabel;
+    RLLabel3: TRLLabel;
+    RLImage1: TRLImage;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    RLDBText4: TRLDBText;
+    RLDBText5: TRLDBText;
+    RLDBText6: TRLDBText;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLLabel6: TRLLabel;
+    RLLabel7: TRLLabel;
+    RLLabel8: TRLLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_imprime: Tfrm_imprime;
+
+implementation
+
+{$R *.dfm}
+uses
+u_impesq, u_dm;
+
+procedure Tfrm_imprime.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+dm.tbalunos.Close
+end;
+
+end.

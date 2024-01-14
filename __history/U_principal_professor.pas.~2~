@@ -1,0 +1,58 @@
+unit U_principal_professor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  Tfrm_principal_professor = class(TForm)
+    Label17: TLabel;
+    Panel2: TPanel;
+    Image4: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    Shape3: TShape;
+    SpeedButton3: TSpeedButton;
+    Panel14: TPanel;
+    Shape4: TShape;
+    SpeedButton6: TSpeedButton;
+    Panel15: TPanel;
+    Shape6: TShape;
+    SpeedButton7: TSpeedButton;
+    Panel16: TPanel;
+    Shape7: TShape;
+    SpeedButton8: TSpeedButton;
+    Panel7: TPanel;
+    Shape8: TShape;
+    Image1: TImage;
+    Label4: TLabel;
+    Label5: TLabel;
+    Panel1: TPanel;
+    Shape1: TShape;
+    Image2: TImage;
+    Label3: TLabel;
+    Label6: TLabel;
+    Panel3: TPanel;
+    Shape2: TShape;
+    Image3: TImage;
+    Label7: TLabel;
+    Label8: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_principal_professor: Tfrm_principal_professor;
+
+implementation
+
+{$R *.dfm}
+
+end.

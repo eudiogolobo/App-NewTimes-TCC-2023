@@ -1,0 +1,621 @@
+object frm_lancamento_financeiro: Tfrm_lancamento_financeiro
+  Left = 0
+  Top = 0
+  Caption = 'frm_lancamento_financeiro'
+  ClientHeight = 514
+  ClientWidth = 884
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnMouseWheelDown = FormMouseWheelDown
+  OnMouseWheelUp = FormMouseWheelUp
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 884
+    Height = 888
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    object Label17: TLabel
+      Left = 115
+      Top = 155
+      Width = 189
+      Height = 22
+      Caption = 'Informa'#231#245'es do aluno:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label12: TLabel
+      Left = 115
+      Top = 375
+      Width = 204
+      Height = 22
+      Caption = 'Informa'#231#245'es referente '#224
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Panel7: TPanel
+      Left = 115
+      Top = 214
+      Width = 251
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 0
+      object Label3: TLabel
+        Left = 0
+        Top = 0
+        Width = 251
+        Height = 15
+        Align = alTop
+        Caption = 'NOME DO ALUNO'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 82
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 48
+        Width = 251
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit1: TDBEdit
+        Left = 0
+        Top = 32
+        Width = 251
+        Height = 12
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'nome'
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel9: TPanel
+      Left = 367
+      Top = 294
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      object Label1: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'DATA DE NASCIMENTO:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 111
+      end
+      object Panel10: TPanel
+        Left = 0
+        Top = 48
+        Width = 150
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit3: TDBEdit
+        Left = 0
+        Top = 32
+        Width = 217
+        Height = 12
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'data_nasc'
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel11: TPanel
+      Left = 115
+      Top = 294
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      object Label6: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'CPF:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 22
+      end
+      object Panel12: TPanel
+        Left = 0
+        Top = 48
+        Width = 150
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object DBEdit5: TDBEdit
+        Left = 0
+        Top = 32
+        Width = 217
+        Height = 12
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'cpf'
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel35: TPanel
+      Left = 115
+      Top = 54
+      Width = 653
+      Height = 72
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      TabOrder = 3
+      object Label2: TLabel
+        Left = 13
+        Top = 28
+        Width = 236
+        Height = 22
+        Caption = 'Lan'#231'amento De Pagamento'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+    object Panel3: TPanel
+      Left = 115
+      Top = 185
+      Width = 650
+      Height = 1
+      BevelOuter = bvNone
+      Caption = 'Informa'#231#245'es do curso:'
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 4
+    end
+    object pnl_salvar: TPanel
+      Left = 115
+      Top = 742
+      Width = 97
+      Height = 30
+      BevelOuter = bvNone
+      Color = clGreen
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 5
+      object btn_salvar: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 97
+        Height = 30
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'SALVAR'
+        Flat = True
+        OnClick = btn_salvarClick
+        ExplicitLeft = 100
+        ExplicitHeight = 33
+      end
+    end
+    object pnl_cancelar: TPanel
+      Left = 250
+      Top = 742
+      Width = 97
+      Height = 30
+      BevelOuter = bvNone
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 6
+      object btn_cancelar: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 97
+        Height = 30
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'CANCELAR'
+        Flat = True
+        OnClick = btn_cancelarClick
+        ExplicitLeft = 100
+        ExplicitHeight = 33
+      end
+    end
+    object Panel20: TPanel
+      Left = 115
+      Top = 405
+      Width = 653
+      Height = 1
+      BevelOuter = bvNone
+      Caption = 'Informa'#231#245'es do curso:'
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 7
+    end
+    object Panel21: TPanel
+      Left = 115
+      Top = 434
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 8
+      object Label13: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'VALOR DA PARCELA:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 102
+      end
+      object Label4: TLabel
+        Left = 0
+        Top = 32
+        Width = 13
+        Height = 13
+        Caption = 'R$'
+      end
+      object Panel26: TPanel
+        Left = 0
+        Top = 48
+        Width = 150
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object Edit1: TEdit
+        Left = 15
+        Top = 32
+        Width = 121
+        Height = 15
+        BorderStyle = bsNone
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel22: TPanel
+      Left = 367
+      Top = 434
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 9
+      object Label14: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'FORMA DE PAGAMENTO:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 117
+      end
+      object Edit4: TEdit
+        Left = 0
+        Top = 32
+        Width = 121
+        Height = 15
+        BorderStyle = bsNone
+        Enabled = False
+        TabOrder = 0
+      end
+      object Panel5: TPanel
+        Left = 0
+        Top = 48
+        Width = 150
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 1
+      end
+    end
+    object Panel27: TPanel
+      Left = 115
+      Top = 522
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 10
+      object Label5: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'VALOR PAGO:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 66
+      end
+      object Label7: TLabel
+        Left = 0
+        Top = 32
+        Width = 13
+        Height = 13
+        Caption = 'R$'
+      end
+      object Panel28: TPanel
+        Left = 0
+        Top = 48
+        Width = 150
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object Edit2: TEdit
+        Left = 15
+        Top = 32
+        Width = 121
+        Height = 15
+        BorderStyle = bsNone
+        TabOrder = 1
+        OnChange = Edit2Change
+      end
+    end
+    object Panel29: TPanel
+      Left = 618
+      Top = 522
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 11
+      object Label22: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'DEVENDO:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 49
+      end
+      object Label9: TLabel
+        Left = 0
+        Top = 32
+        Width = 13
+        Height = 13
+        Caption = 'R$'
+      end
+      object Panel30: TPanel
+        Left = 0
+        Top = 48
+        Width = 150
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object Edit3: TEdit
+        Left = 15
+        Top = 32
+        Width = 121
+        Height = 15
+        BorderStyle = bsNone
+        Enabled = False
+        TabOrder = 1
+      end
+    end
+    object Panel31: TPanel
+      Left = 618
+      Top = 428
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 12
+      object Label23: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'DIA DE VENCIMENTO:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 101
+      end
+      object dtp1: TDateTimePicker
+        Left = 0
+        Top = 27
+        Width = 145
+        Height = 21
+        Date = 45236.000000000000000000
+        Time = 0.802734270830114800
+        Enabled = False
+        TabOrder = 0
+      end
+    end
+    object Panel4: TPanel
+      Left = 367
+      Top = 522
+      Width = 150
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 13
+      object Label8: TLabel
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 15
+        Align = alTop
+        Caption = 'DATA DO PAGAMENTO:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 109
+      end
+      object dtp2: TDateTimePicker
+        Left = 0
+        Top = 27
+        Width = 145
+        Height = 21
+        Date = 45236.000000000000000000
+        Time = 0.802734270830114800
+        TabOrder = 0
+      end
+    end
+    object Panel6: TPanel
+      Left = 115
+      Top = 602
+      Width = 154
+      Height = 49
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 14
+      object Label10: TLabel
+        Left = 0
+        Top = 0
+        Width = 154
+        Height = 15
+        Align = alTop
+        Caption = 'STATUS:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 39
+      end
+      object ComboBox1: TComboBox
+        Left = 0
+        Top = 21
+        Width = 145
+        Height = 21
+        TabOrder = 0
+        Text = 'Selecione'
+        OnChange = ComboBox1Change
+        Items.Strings = (
+          'INADIMPLENTE'
+          #192' VENCER'
+          'PAGO')
+      end
+    end
+  end
+  object ScrollBar1: TScrollBar
+    Left = 867
+    Top = 0
+    Width = 17
+    Height = 514
+    Align = alRight
+    Kind = sbVertical
+    Max = 888
+    PageSize = 553
+    TabOrder = 1
+    OnChange = ScrollBar1Change
+    ExplicitHeight = 581
+  end
+end

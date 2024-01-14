@@ -1,0 +1,60 @@
+unit U_pesqaluser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  Tfrm_pqaluser = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label15: TLabel;
+    Image1: TImage;
+    Label2: TLabel;
+    lb_total: TLabel;
+    txt_buscar: TEdit;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel34: TPanel;
+    DBGrid1: TDBGrid;
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pqaluser: Tfrm_pqaluser;
+
+implementation
+
+{$R *.dfm}
+uses
+ U_altuser, u_dm;
+
+procedure Tfrm_pqaluser.DBGrid1CellClick(Column: TColumn);
+begin
+frm_altuser.edit1.Text:=dbgrid1.Fields[0].value;
+frm_altuser.edit1.SetFocus;
+frm_pqaluser.Close;
+end;
+
+procedure Tfrm_pqaluser.SpeedButton1Click(Sender: TObject);
+ begin
+    with dm.qusuarios do
+    begin
+    close;
+    sql.clear;
+    sql.Add('select * from usuarios where nome like ''%'+txt_buscar.Text+'%''');
+    open;
+    fetchall;
+    lb_total.Caption:=inttostr(dm.qalunos.RecordCount);
+  end;
+ end;
+
+end.

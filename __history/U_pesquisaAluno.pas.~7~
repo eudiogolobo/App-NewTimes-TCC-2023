@@ -1,0 +1,175 @@
+unit U_pesquisaAluno;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+
+type
+  Tfrm_pesquisaaluno = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    txt_buscar: TEdit;
+    cbop: TComboBox;
+    rd: TRadioGroup;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel4: TPanel;
+    SpeedButton2: TSpeedButton;
+    DBGrid1: TDBGrid;
+    Label2: TLabel;
+    lb_total: TLabel;
+    Panel34: TPanel;
+    Label15: TLabel;
+    Image1: TImage;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_pesquisaaluno: Tfrm_pesquisaaluno;
+
+implementation
+
+{$R *.dfm}
+uses
+U_cadastroAluno, U_dm, U_pqal, U_login;
+
+procedure Tfrm_pesquisaaluno.FormActivate(Sender: TObject);
+begin
+dm.tbcursos.Open();
+dm.tbcursos.First;
+ while not dm.tbcursos.Eof do
+ begin
+   cbop.Items.Add(dm.tbcursosnome.value);
+   dm.tbcursos.Next;
+  end;
+
+
+
+end;
+
+procedure Tfrm_pesquisaaluno.SpeedButton1Click(Sender: TObject);
+begin
+if txt_buscar.Text = '' then
+  begin
+  showmessage('Digite algo para pesquisar');
+  txt_buscar.SetFocus;
+  end
+    else
+
+      begin
+      if rd.ItemIndex=2 then
+         begin
+         if (cbop.ItemIndex=0) or (cbop.ItemIndex= -1) then
+          begin
+           with dm.qconsul do
+           begin
+             close;
+            sql.clear;
+            sql.Add('select * from alunos where nome like ''%'+txt_buscar.Text+'%''');
+            open;
+            fetchall;
+            lb_total.Caption:=inttostr(dm.qconsul.RecordCount);
+           end;
+
+         end
+           else
+           begin
+             with dm.qconsul do
+           begin
+           close;
+            sql.clear;
+            sql.Add('select * from alunos where nome like ''%'+txt_buscar.Text+'%'' and curso = :x');
+            parambyname('x').asstring:=cbop.Text;
+            open;
+            lb_total.Caption:=inttostr(dm.qconsul.RecordCount);
+           end;
+         end;
+        end
+         else
+         begin
+             if rd.ItemIndex=0 then
+               begin
+             if (cbop.ItemIndex=0) or (cbop.ItemIndex= -1) then
+              begin
+               with dm.qconsul do
+               begin
+                 close;
+                sql.clear;
+                sql.Add('select * from alunos where nome like ''%'+txt_buscar.Text+'%'' and situacao = ''ATIVO'' ');
+                open;
+                lb_total.Caption:=inttostr(dm.qconsul.RecordCount);
+               end;
+
+             end
+               else
+               begin
+                 with dm.qconsul do
+               begin
+               close;
+                sql.clear;
+                sql.Add('select * from alunos where nome like ''%'+txt_buscar.Text+'%'' and situacao = ''ATIVO'' and curso = :x');
+                parambyname('x').asstring:=cbop.Text;
+                open;
+                lb_total.Caption:=inttostr(dm.qconsul.RecordCount);
+               end;
+             end;
+
+            end
+          else
+           begin
+             if rd.ItemIndex=1 then
+               begin
+             if (cbop.ItemIndex=0) or (cbop.ItemIndex= -1) then
+              begin
+               with dm.qconsul do
+               begin
+                 close;
+                sql.clear;
+                sql.Add('select * from alunos where nome like ''%'+txt_buscar.Text+'%'' and situacao =''INATIVO'' ');
+                open;
+                lb_total.Caption:=inttostr(dm.qconsul.RecordCount);
+               end;
+
+             end
+               else
+               begin
+                 with dm.qconsul do
+               begin
+               close;
+                sql.clear;
+                sql.Add('select * from alunos where nome like ''%'+txt_buscar.Text+'%'' and situacao = ''INATIVO'' and curso = :x');
+                parambyname('x').asstring:=cbop.Text;
+                open;
+                lb_total.Caption:=inttostr(dm.qconsul.RecordCount);
+               end;
+             end;
+            end
+
+
+
+
+           end
+
+         end;
+      end;
+
+end;
+
+procedure Tfrm_pesquisaaluno.SpeedButton2Click(Sender: TObject);
+begin
+application.CreateForm(Tfrm_cadaluno,frm_cadaluno);
+frm_cadaluno.ShowModal;
+frm_pesquisaaluno.close;
+
+end;
+
+end.

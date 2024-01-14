@@ -1,0 +1,32 @@
+unit U_im_turma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls;
+
+type
+  Tfrm_turma_documento = class(TForm)
+    tr: TRLReport;
+    RLLabel1: TRLLabel;
+    RLLabel2: TRLLabel;
+    RLImage1: TRLImage;
+    RLPanel1: TRLPanel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLSystemInfo2: TRLSystemInfo;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_turma_documento: Tfrm_turma_documento;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,99 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  U_login in 'U_login.pas' {frm_login},
+  U_principalpas in 'U_principalpas.pas' {frm_prncipal},
+  U_pesquisaAluno in 'U_pesquisaAluno.pas' {frm_pesquisaaluno},
+  U_pesquisaCurso in 'U_pesquisaCurso.pas' {frm_pesquisacurso},
+  U_cadastroAluno in 'U_cadastroAluno.pas' {frm_cadaluno},
+  U_dm in 'U_dm.pas' {dm: TDataModule},
+  U_altCadAluno in 'U_altCadAluno.pas' {frm_altcadaluno},
+  U_pqal in 'U_pqal.pas' {frm_pqal},
+  U_cadastrocurso in 'U_cadastrocurso.pas' {frm_cadcurso},
+  U_pqCurso in 'U_pqCurso.pas' {frm_pqCurso},
+  U_altCur in 'U_altCur.pas' {frm_altCurso},
+  U_exCurso in 'U_exCurso.pas' {frm_excurso},
+  U_pqexcur in 'U_pqexcur.pas' {frm_pqex},
+  U_exaluno in 'U_exaluno.pas' {frm_exaluno},
+  U_pqexaluno in 'U_pqexaluno.pas' {frm_pqexal},
+  U_pesquisaUsu in 'U_pesquisaUsu.pas' {frm_pesquisauser},
+  U_caduser in 'U_caduser.pas' {frm_caduser},
+  U_altuser in 'U_altuser.pas' {frm_altuser},
+  U_pesqaluser in 'U_pesqaluser.pas' {frm_pqaluser},
+  U_deluserpas in 'U_deluserpas.pas' {frm_deluser},
+  U_pqdeluser in 'U_pqdeluser.pas' {frm_pqdeluser},
+  U_im in 'U_im.pas' {frm_imprime},
+  U_impesq in 'U_impesq.pas' {frm_impes},
+  U_imcaluno in 'U_imcaluno.pas' {frm_imaluno},
+  U_inicio in 'U_inicio.pas' {frm_inicio},
+  U_insere_aluno in 'U_insere_aluno.pas' {frm_insere_aluno},
+  U_cadturma in 'U_cadturma.pas' {frm_cadturma},
+  U_altturma in 'U_altturma.pas' {frm_altturma},
+  U_altpesturma in 'U_altpesturma.pas' {frm_pqaltturma},
+  U_turma_relacao in 'U_turma_relacao.pas' {frm_turma_relacao},
+  U_im_turma in 'U_im_turma.pas' {frm_turma_documento},
+  U_pes_turma_relacao in 'U_pes_turma_relacao.pas' {frm_pesqimpturma},
+  U_exturma in 'U_exturma.pas' {frm_exturma},
+  U_imprime_atestado in 'U_imprime_atestado.pas' {frm_imprecao_atestadof},
+  U_cad_avaliacao in 'U_cad_avaliacao.pas' {frm_cad_avaliacao},
+  U_lancamento_notas in 'U_lancamento_notas.pas' {frm_lacamento_notas},
+  U_principal_professor in 'U_principal_professor.pas' {frm_principal_professor},
+  U_inicio_professor in 'U_inicio_professor.pas' {Form3},
+  U_lancamento_notas_quadro in 'U_lancamento_notas_quadro.pas' {frm_lacamento_notas_quadro},
+  U_cadAluno02 in 'U_cadAluno02.pas' {frm_cadAluno02},
+  U_cadAluno03 in 'U_cadAluno03.pas' {frm_cadAluno03},
+  U_cadAluno04 in 'U_cadAluno04.pas' {frm_cadAluno04},
+  U_cadAluno05 in 'U_cadAluno05.pas' {frm_cadAluno05},
+  U_cadAluno06 in 'U_cadAluno06.pas' {frm_cadAluno06},
+  U_cadAluno07 in 'U_cadAluno07.pas' {frm_cadAluno07},
+  U_busca_img_rg in 'U_busca_img_rg.pas' {frm_busca_img_rg};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tfrm_login, frm_login);
+  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(Tfrm_cadcurso, frm_cadcurso);
+  Application.CreateForm(Tfrm_pqCurso, frm_pqCurso);
+  Application.CreateForm(Tfrm_altCurso, frm_altCurso);
+  Application.CreateForm(Tfrm_excurso, frm_excurso);
+  Application.CreateForm(Tfrm_pqex, frm_pqex);
+  Application.CreateForm(Tfrm_exaluno, frm_exaluno);
+  Application.CreateForm(Tfrm_pqexal, frm_pqexal);
+  Application.CreateForm(Tfrm_pesquisauser, frm_pesquisauser);
+  Application.CreateForm(Tfrm_caduser, frm_caduser);
+  Application.CreateForm(Tfrm_altuser, frm_altuser);
+  Application.CreateForm(Tfrm_pqaluser, frm_pqaluser);
+  Application.CreateForm(Tfrm_deluser, frm_deluser);
+  Application.CreateForm(Tfrm_pqdeluser, frm_pqdeluser);
+  Application.CreateForm(Tfrm_imprime, frm_imprime);
+  Application.CreateForm(Tfrm_impes, frm_impes);
+  Application.CreateForm(Tfrm_imaluno, frm_imaluno);
+  Application.CreateForm(Tfrm_inicio, frm_inicio);
+  Application.CreateForm(Tfrm_insere_aluno, frm_insere_aluno);
+  Application.CreateForm(Tfrm_cadturma, frm_cadturma);
+  Application.CreateForm(Tfrm_altturma, frm_altturma);
+  Application.CreateForm(Tfrm_pqaltturma, frm_pqaltturma);
+  Application.CreateForm(Tfrm_turma_relacao, frm_turma_relacao);
+  Application.CreateForm(Tfrm_turma_documento, frm_turma_documento);
+  Application.CreateForm(Tfrm_pesqimpturma, frm_pesqimpturma);
+  Application.CreateForm(Tfrm_exturma, frm_exturma);
+  Application.CreateForm(Tfrm_imprecao_atestadof, frm_imprecao_atestadof);
+  Application.CreateForm(Tfrm_cad_avaliacao, frm_cad_avaliacao);
+  Application.CreateForm(Tfrm_lacamento_notas, frm_lacamento_notas);
+  Application.CreateForm(Tfrm_principal_professor, frm_principal_professor);
+  Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(Tfrm_lacamento_notas_quadro, frm_lacamento_notas_quadro);
+  Application.CreateForm(Tfrm_cadAluno02, frm_cadAluno02);
+  Application.CreateForm(Tfrm_cadAluno03, frm_cadAluno03);
+  Application.CreateForm(Tfrm_cadAluno04, frm_cadAluno04);
+  Application.CreateForm(Tfrm_cadAluno05, frm_cadAluno05);
+  Application.CreateForm(Tfrm_cadAluno06, frm_cadAluno06);
+  Application.CreateForm(Tfrm_cadAluno07, frm_cadAluno07);
+  Application.CreateForm(Tfrm_busca_img_rg, frm_busca_img_rg);
+  Application.CreateForm(Tfrm_prncipal, frm_prncipal);
+  Application.Run;
+end.

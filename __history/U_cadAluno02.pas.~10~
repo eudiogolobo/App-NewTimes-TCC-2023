@@ -1,0 +1,134 @@
+unit U_cadAluno02;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  Tfrm_cadAluno02 = class(TForm)
+    Panel2: TPanel;
+    Label17: TLabel;
+    Panel33: TPanel;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Label4: TLabel;
+    Panel11: TPanel;
+    Label5: TLabel;
+    Panel13: TPanel;
+    Label6: TLabel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Label7: TLabel;
+    Panel16: TPanel;
+    Panel19: TPanel;
+    Label9: TLabel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Label10: TLabel;
+    Panel23: TPanel;
+    Label11: TLabel;
+    Panel24: TPanel;
+    Panel28: TPanel;
+    Label14: TLabel;
+    Panel35: TPanel;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Label18: TLabel;
+    Panel30: TPanel;
+    Panel27: TPanel;
+    Label13: TLabel;
+    Panel17: TPanel;
+    Label8: TLabel;
+    pnl_salvar: TPanel;
+    btn_salvar: TSpeedButton;
+    pnl_incluir: TPanel;
+    btn_incluir: TSpeedButton;
+    Edit1: TEdit;
+    ComboBox2: TComboBox;
+    ComboBox1: TComboBox;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    ComboBox3: TComboBox;
+    ComboBox4: TComboBox;
+    ComboBox5: TComboBox;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Panel3: TPanel;
+    Edit6: TEdit;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    ScrollBar1: TScrollBar;
+    label100: TLabel;
+    procedure btn_salvarClick(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure btn_incluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cadAluno02: Tfrm_cadAluno02;
+
+implementation
+
+{$R *.dfm}
+uses
+U_cadAluno03, U_principalpas,U_cadastroAluno;
+
+procedure Tfrm_cadAluno02.btn_incluirClick(Sender: TObject);
+begin
+    frm_cadaluno := Tfrm_cadaluno.Create(self);
+ frm_cadaluno.Parent:= frm_prncipal.panel2;
+ frm_cadaluno.Align:= alClient;
+ frm_cadaluno.BorderStyle:= bsNone;
+ frm_cadaluno.WindowState :=wsMaximized;
+ frm_cadaluno.show;
+end;
+
+procedure Tfrm_cadAluno02.btn_salvarClick(Sender: TObject);
+begin
+ frm_cadAluno03 := Tfrm_cadAluno03.Create(self);
+ frm_cadAluno03.Parent:= frm_prncipal.panel2;
+ frm_cadAluno03.Align:= alClient;
+ frm_cadAluno03.BorderStyle:= bsNone;
+ frm_cadAluno03.WindowState :=wsMaximized;
+ frm_cadAluno03.show;
+
+end;
+
+procedure Tfrm_cadAluno02.FormMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position<=(scrollbar1.max-scrollbar1.PageSize) then
+begin
+  scrollbar1.Position:=scrollbar1.Position+10;
+end;
+end;
+
+procedure Tfrm_cadAluno02.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+if scrollbar1.Position>0 then
+begin
+  scrollbar1.Position:=scrollbar1.Position-10;
+end;
+end;
+
+procedure Tfrm_cadAluno02.ScrollBar1Change(Sender: TObject);
+begin
+panel2.top:= -scrollbar1.position;
+end;
+
+end.
